@@ -22,7 +22,7 @@ class Serie(models.Model):
     estrellas = models.IntegerField()
     genero = models.CharField(max_length=20, choices=OPCIONES_GENERO)
     precio_alquiler = models.DecimalField(max_digits=8, decimal_places=2)
-    ATP = models.BooleanField()
+    atp = models.BooleanField()
     estado = models.CharField(max_length=10, choices=OPCIONES_ESTADO)
 
     def __str__(self):

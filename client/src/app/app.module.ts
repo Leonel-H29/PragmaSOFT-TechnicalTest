@@ -5,12 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { SeriesComponent } from './components/series/series.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListSeriesComponent } from './components/series/list-series/list-series.component';
 
 @NgModule({
-  declarations: [AppComponent, SeriesComponent, LoginComponent],
+  declarations: [AppComponent, SeriesComponent, LoginComponent, ListSeriesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

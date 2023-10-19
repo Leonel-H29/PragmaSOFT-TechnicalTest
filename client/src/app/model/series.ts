@@ -6,7 +6,7 @@ export class Serie {
   estrellas: number;
   genero: string;
   precio_alquiler: number;
-  ATP: boolean;
+  atp: boolean;
   estado: string;
 
   constructor(
@@ -16,7 +16,7 @@ export class Serie {
     estrellas: number,
     genero: string,
     precio_alquiler: number,
-    ATP: boolean,
+    atp: boolean,
     estado: string
   ) {
     this.titulo = titulo;
@@ -25,7 +25,7 @@ export class Serie {
     this.estrellas = estrellas;
     this.genero = genero;
     this.precio_alquiler = precio_alquiler;
-    this.ATP = ATP;
+    this.atp = atp;
     this.estado = estado;
   }
 }
