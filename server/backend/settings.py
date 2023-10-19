@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-z(zug1f)$xf$*niby*_j%a(0ic^#!o@vrd8gh!jy7vo+d69=qs
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Django REST framework
 DRF = [
@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ORIGIN = [
-    "http://localhost:8080",
+    "http://localhost:4200",
 ]
-CORS_ORIGIN_WHITELIST = ["http://localhost:8080"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -162,3 +162,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#APPEND_SLASH = True

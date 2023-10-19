@@ -14,7 +14,7 @@ export class DbSettingsService {
   constructor(private http: HttpClient) {}
 
   public Login(loginUser: User): Observable<User> {
-    return this.http.post<User>(this.authURL + 'login', loginUser);
+    return this.http.post<User>(this.authURL + 'login/', loginUser);
   }
 
   /*
