@@ -1,1 +1,72 @@
-<p>login works!</p>
+<div class="container">
+  <h2 id="title-login">LOGIN</h2>
+  <form id="contactForm" (ngSubmit)="onLogin()" novalidate #f="ngForm">
+    <div class="mb-3">
+      <label class="form-label">Host: </label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="credentials.host"
+        id="host"
+        name="host"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="puerto" class="form-label">Puerto:</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="credentials.puerto"
+        id="puerto"
+        name="puerto"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="nombre_base_de_datos" class="form-label"
+        >Nombre de la base de datos:</label
+      >
+      <input
+        type="text"
+        [(ngModel)]="credentials.nombre_base_de_datos"
+        class="form-control"
+        id="nombre_base_de_datos"
+        name="nombre_base_de_datos"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="usuario" class="form-label">Usuario:</label>
+      <input
+        type="text"
+        [(ngModel)]="credentials.usuario"
+        class="form-control"
+        id="usuario"
+        name="usuario"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="contrasena" class="form-label">Contraseña:</label>
+      <input
+        type="password"
+        class="form-control"
+        [(ngModel)]="credentials.contrasena"
+        id="contrasena"
+        name="contrasena"
+      />
+    </div>
+
+    <!--
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    -->
+    <button
+      class="btn btn-primary btn-xl"
+      id="submitButton"
+      type="submit"
+      title="Login"
+    >
+      Iniciar sesión
+    </button>
+  </form>
+</div>
