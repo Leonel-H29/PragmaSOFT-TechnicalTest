@@ -10,6 +10,7 @@ from drf_yasg import openapi
 
 #from user import views as user_views
 from user import views as user_views
+from series.urls import router as routerSeries
 
 
 class DefaultRouter(routers.DefaultRouter):
@@ -29,7 +30,7 @@ class DefaultRouter(routers.DefaultRouter):
 
 
 router = DefaultRouter()
-#router.extend(routerUser)
+router.extend(routerSeries)
 
 
 url = 'api/'
