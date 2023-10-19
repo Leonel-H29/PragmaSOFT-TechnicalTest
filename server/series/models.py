@@ -15,6 +15,7 @@ class Serie(models.Model):
         ('Inactiva', 'Inactiva'),
     ]
 
+    id_serie = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=255)
     descripcion = models.TextField()
     fecha_estreno = models.DateField()
@@ -26,3 +27,10 @@ class Serie(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    class Meta:
+        db_table = 'series'
+        verbose_name = 'serie'
+        verbose_name_plural = 'series'
+        ordering = ['id_serie']
+        unique_together = ('id_serie', 'titulo')
