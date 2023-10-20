@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SeriesService } from 'src/app/service/series.service';
-import { DbSettingsService } from 'src/app/service/db-settings.service';
 import { Serie } from 'src/app/model/series';
+import { esCampoRequerido } from 'src/app/utils/validations-util';
 
 @Component({
   selector: 'app-new-series',
@@ -11,24 +11,56 @@ import { Serie } from 'src/app/model/series';
   styleUrls: ['./new-series.component.css'],
 })
 export class NewSeriesComponent {
-  formulario: FormGroup;
+  formulario!: FormGroup;
 
   constructor(
     public modal: NgbActiveModal,
     private fb: FormBuilder,
-    private serieServ: SeriesService,
-    private db: DbSettingsService
-  ) {
-    this.formulario = fb.group({
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
+    private serieServ: SeriesService
+  ) {}
+
+  ngOnInit(): void {
+    //Defino el formulario con sus valores iniciales
+    this.formulario = this.fb.group({
+      titulo: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(39),
+        ],
+      ],
+      descripcion: ['', [Validators.required, Validators.minLength(6)]],
       fecha_estreno: ['', Validators.required],
-      estrellas: ['', Validators.required],
+      estrellas: [
+        '',
+        [Validators.required, Validators.min(0), Validators.max(5)],
+      ],
       genero: ['', Validators.required],
-      precio_alquiler: ['', Validators.required],
-      atp: [false, Validators.required],
-      estado: ['', Validators.required],
+      precio_alquiler: [
+        '',
+        [Validators.required, Validators.min(0), Validators.max(100000000)],
+      ],
+      //atp: [false, Validators.required],
+      atp: [false],
+      estado: ['AC', Validators.required],
     });
+    /*Le quito la restriccion a 'ATP' para que pueda tomar un valor True o False y sea valida para el formulario*/
+    this.formulario.statusChanges.subscribe(() => {
+      if (
+        this.formulario.get('atp')?.value !== true &&
+        this.formulario.get('atp')?.value !== false
+      ) {
+        this.formulario.get('atp')?.setErrors({ invalidATPValue: true });
+      } else {
+        this.formulario.get('atp')?.setErrors(null);
+      }
+    });
+    console.log(this.formulario.value);
+  }
+
+  validarInputs(control: any) {
+    return esCampoRequerido(control);
   }
 
   guardarNuevoRegistro() {

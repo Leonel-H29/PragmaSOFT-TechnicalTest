@@ -24,8 +24,17 @@ export class UpdateSeriesComponent {
   ngOnInit(): void {
     if (this.serie.id_serie) this.idserie = this.serie.id_serie;
     this.formulario = this.fb.group({
-      titulo: [this.serie.titulo, Validators.required],
-      descripcion: [this.serie.descripcion, Validators.required],
+      titulo: [
+        this.serie.titulo,
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(39),
+      ],
+      descripcion: [
+        this.serie.descripcion,
+        Validators.required,
+        Validators.minLength(6),
+      ],
       fecha_estreno: [this.serie.fecha_estreno, Validators.required],
       estrellas: [this.serie.estrellas, Validators.required],
       genero: [this.serie.genero, Validators.required],
