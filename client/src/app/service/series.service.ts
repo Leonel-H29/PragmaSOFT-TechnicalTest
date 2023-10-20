@@ -19,7 +19,7 @@ export class SeriesService {
    * GetSerie
    */
   public GetSerie(id: number): Observable<Serie> {
-    return this.http.get<Serie>(this.serieURL + id);
+    return this.http.get<Serie>(this.serieURL + id + '/');
   }
 
   /**
@@ -33,13 +33,13 @@ export class SeriesService {
    * UpdateSerie
    */
   public UpdateSerie(id: number, serie: Serie): Observable<any> {
-    return this.http.put<any>(this.serieURL + id, serie);
+    return this.http.put<any>(this.serieURL + id + '/', serie);
   }
 
   /**
    * DeleteSerie
    */
   public DeleteSerie(id: number) {
-    return this.http.delete<Serie>(this.serieURL + id);
+    return this.http.delete<Serie>(this.serieURL + id + '/');
   }
 }
