@@ -11,19 +11,19 @@ class Serie(models.Model):
     ]
 
     OPCIONES_ESTADO = [
-        ('Activa', 'Activa'),
-        ('Inactiva', 'Inactiva'),
+        ('AC', 'Activa'),
+        ('AN', 'Inactiva'),
     ]
 
     id_serie = models.AutoField(primary_key=True)
-    titulo = models.CharField(max_length=255)
+    titulo = models.CharField(max_length=30)
     descripcion = models.TextField()
     fecha_estreno = models.DateField()
     estrellas = models.IntegerField()
     genero = models.CharField(max_length=20, choices=OPCIONES_GENERO)
     precio_alquiler = models.DecimalField(max_digits=8, decimal_places=2)
     atp = models.BooleanField()
-    estado = models.CharField(max_length=10, choices=OPCIONES_ESTADO)
+    estado = models.CharField(max_length=2, choices=OPCIONES_ESTADO)
 
     def __str__(self):
         return self.titulo
