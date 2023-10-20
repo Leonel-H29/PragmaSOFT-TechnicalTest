@@ -13,9 +13,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewSeriesComponent } from './components/series/new-series/new-series.component';
 import { UpdateSeriesComponent } from './components/series/update-series/update-series.component';
 import { EditSeriesComponent } from './components/series/edit-series/edit-series.component';
+import { DeleteSeriesComponent } from './components/series/delete-series/delete-series.component';
 
 @NgModule({
-  declarations: [AppComponent, SeriesComponent, LoginComponent, ListSeriesComponent, NewSeriesComponent, UpdateSeriesComponent, EditSeriesComponent],
+  declarations: [AppComponent, SeriesComponent, LoginComponent, ListSeriesComponent, NewSeriesComponent, UpdateSeriesComponent, EditSeriesComponent, DeleteSeriesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

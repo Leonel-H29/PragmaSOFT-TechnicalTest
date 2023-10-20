@@ -78,7 +78,13 @@
       Modificar
     </button>
     <button class="btn btn-secondary me-2" type="button">Anular</button>
-    <button class="btn btn-danger me-2" type="button">Eliminar</button>
+    <button
+      class="btn btn-danger me-2"
+      type="button"
+      (click)="abrirModalEliminacion(registroSeleccionado)"
+    >
+      Eliminar
+    </button>
   </div>
   <button class="btn btn-primary" type="button">Salir</button>
 </div>

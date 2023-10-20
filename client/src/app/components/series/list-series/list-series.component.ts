@@ -5,6 +5,7 @@ import { DbSettingsService } from 'src/app/service/db-settings.service';
 import { SeriesService } from 'src/app/service/series.service';
 import { NewSeriesComponent } from '../new-series/new-series.component';
 import { UpdateSeriesComponent } from '../update-series/update-series.component';
+import { DeleteSeriesComponent } from '../delete-series/delete-series.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -71,6 +72,21 @@ export class ListSeriesComponent {
 
   abrirModalModificacion(registro: Serie) {
     const modalRef = this.modalServ.open(UpdateSeriesComponent);
+    modalRef.componentInstance.serie = registro;
+    modalRef.result.then((result: string) => {
+      if (result === 'success') {
+        // El modal fue cerrado con éxito
+        console.log('Exito');
+        this.GetSeries();
+      } else {
+        // El modal fue cerrado con cancelar u otro evento
+        console.log('Error');
+      }
+    });
+  }
+
+  abrirModalEliminacion(registro: Serie) {
+    const modalRef = this.modalServ.open(DeleteSeriesComponent);
     modalRef.componentInstance.serie = registro;
     modalRef.result.then((result: string) => {
       if (result === 'success') {
