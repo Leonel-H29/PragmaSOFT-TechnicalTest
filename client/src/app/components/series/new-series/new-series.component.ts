@@ -56,7 +56,7 @@ export class NewSeriesComponent {
         this.formulario.get('atp')?.setErrors(null);
       }
     });
-    console.log(this.formulario.value);
+    //console.log(this.formulario.value);
   }
 
   validarInputs(control: any) {

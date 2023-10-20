@@ -60,33 +60,34 @@
     </tbody>
   </table>
 </ng-template>
-
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <div class="d-flex">
-    <button
-      class="btn btn-success me-2"
-      type="button"
-      (click)="abrirModalNuevo()"
-    >
-      Nuevo
-    </button>
-    <button
-      class="btn btn-warning me-2"
-      type="button"
-      (click)="abrirModalModificacion(registroSeleccionado)"
-    >
-      Modificar
-    </button>
-    <button class="btn btn-secondary me-2" type="button">Anular</button>
-    <button
-      class="btn btn-danger me-2"
-      type="button"
-      (click)="abrirModalEliminacion(registroSeleccionado)"
-    >
-      Eliminar
-    </button>
+<div class="card-footer text-body-secondary">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex">
+      <button
+        class="btn btn-success me-2"
+        type="button"
+        (click)="abrirModalNuevo()"
+      >
+        Nuevo
+      </button>
+      <button
+        class="btn btn-warning me-2"
+        type="button"
+        (click)="abrirModalModificacion(registroSeleccionado)"
+      >
+        Modificar
+      </button>
+      <button class="btn btn-secondary me-2" type="button">Anular</button>
+      <button
+        class="btn btn-danger me-2"
+        type="button"
+        (click)="abrirModalEliminacion(registroSeleccionado)"
+      >
+        Eliminar
+      </button>
+    </div>
+    <button class="btn btn-primary" type="button">Salir</button>
   </div>
-  <button class="btn btn-primary" type="button">Salir</button>
 </div>
 
 <!--

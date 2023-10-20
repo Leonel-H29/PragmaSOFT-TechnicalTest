@@ -9,6 +9,7 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="formulario" (ngSubmit)="guardarRegistroEditado()">
+    <!--TITULO-->
     <div class="mb-3">
       <label for="titulo" class="form-label">Título</label>
       <input
@@ -19,6 +20,10 @@
         required
       />
     </div>
+    <div *ngIf="validarInputs(formulario.get('titulo'))" class="text-danger">
+      El título es requerido.
+    </div>
+    <!--DESCRIPCION-->
     <div class="mb-3">
       <label for="descripcion" class="form-label">Descripción</label>
       <textarea
@@ -27,7 +32,14 @@
         formControlName="descripcion"
         required
       ></textarea>
+      <div
+        *ngIf="validarInputs(formulario.get('descripcion'))"
+        class="text-danger"
+      >
+        La descripción es requerida.
+      </div>
     </div>
+    <!--FECHA DE ESTRENO-->
     <div class="mb-3">
       <label for="fecha_estreno" class="form-label">Fecha de Estreno</label>
       <input
@@ -37,7 +49,14 @@
         formControlName="fecha_estreno"
         required
       />
+      <div
+        *ngIf="validarInputs(formulario.get('fecha_estreno'))"
+        class="text-danger"
+      >
+        La fecha de estreno es requerida.
+      </div>
     </div>
+    <!--ESTRELLAS-->
     <div class="mb-3">
       <label for="estrellas" class="form-label">Estrellas</label>
       <input
@@ -47,7 +66,14 @@
         formControlName="estrellas"
         required
       />
+      <div
+        *ngIf="validarInputs(formulario.get('estrellas'))"
+        class="text-danger"
+      >
+        Las estrellas son requeridas.
+      </div>
     </div>
+    <!--GENERO-->
     <div class="mb-3">
       <label for="genero" class="form-label">Género</label>
       <input
@@ -57,7 +83,14 @@
         formControlName="genero"
         required
       />
+      <div
+        *ngIf="validarInputs(formulario.get('precio_alquiler'))"
+        class="text-danger"
+      >
+        El precio de alquiler es requerido.
+      </div>
     </div>
+    <!--PRECIO DE ALQUILER-->
     <div class="mb-3">
       <label for="precio_alquiler" class="form-label">Precio de Alquiler</label>
       <input
@@ -67,7 +100,14 @@
         formControlName="precio_alquiler"
         required
       />
+      <div
+        *ngIf="validarInputs(formulario.get('precio_alquiler'))"
+        class="text-danger"
+      >
+        El precio de alquiler es requerido.
+      </div>
     </div>
+    <!--APTO PARA TODO PUBLICO-->
     <div class="mb-3 form-check">
       <input
         type="checkbox"
@@ -78,6 +118,7 @@
       />
       <label class="form-check-label" for="atp">ATP</label>
     </div>
+    <!--ESTADO-->
     <div class="mb-3">
       <label for="estado" class="form-label">Estado</label>
       <input
@@ -88,7 +129,25 @@
         required
       />
     </div>
-    <button type="submit" class="btn btn-primary">Guardar</button>
+
+    <div *ngIf="!formulario.valid; else validForm">
+      <div class="alert alert-danger" role="alert">
+        Por favor rellene los campos correctamente
+      </div>
+    </div>
+    <ng-template #validForm>
+      <div class="alert alert-success" role="alert">
+        Los campos se llenaron de forma correcta, puede continuar
+      </div>
+    </ng-template>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!formulario.valid"
+    >
+      Guardar
+    </button>
   </form>
 </div>
 <div class="modal-footer">
