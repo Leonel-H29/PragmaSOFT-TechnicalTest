@@ -9,36 +9,31 @@ import { SeriesService } from 'src/app/service/series.service';
   styleUrls: ['./estado-series.component.css'],
 })
 export class EstadoSeriesComponent {
-  @Input() serie?: Serie;
-  idserie?: number = 0;
-  data?: Serie;
+  serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC');
+  @Input() idSerie: number = 0; // Recibe el objeto Serie desde el componente padre
 
   constructor(public modal: NgbActiveModal, private serieServ: SeriesService) {}
 
   ngOnInit(): void {
-    if (this.serie !== undefined) {
-      this.idserie = this.serie.id_serie;
-      this.data = new Serie(
-        this.serie.titulo,
-        this.serie.descripcion,
-        this.serie.fecha_estreno,
-        this.serie.estrellas,
-        this.serie.genero,
-        this.serie.precio_alquiler,
-        this.serie.atp,
-        'AN'
+    if (this.idSerie) {
+      this.serieServ.GetSerie(this.idSerie).subscribe(
+        (data) => {
+          this.serie = data;
+        },
+        (err) => {
+          alert('Error al cargar la serie');
+        }
       );
     }
-
-    console.log(this.idserie);
   }
 
   anularRegistro() {
-    if (this.idserie !== undefined && this.data !== undefined) {
+    this.serie.estado = 'AN';
+    if (this.serie) {
       // Enviar solicitud de eliminación al servicio o realizar la acción correspondiente
-      this.serieServ.UpdateSerie(this.idserie, this.data).subscribe(
+      this.serieServ.UpdateSerie(this.idSerie, this.serie).subscribe(
         (data) => {
-          alert('Serie Eliminada!');
+          alert('Serie Anulada!');
           this.modal.close('success');
         },
         (err) => {
