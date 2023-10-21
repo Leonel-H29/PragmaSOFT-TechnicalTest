@@ -1,62 +1,83 @@
 <div class="container">
   <h2 id="title-login">LOGIN</h2>
-  <form id="contactForm" (ngSubmit)="onLogin()" novalidate #f="ngForm">
+  <form id="contactForm" (ngSubmit)="onLogin()" [formGroup]="formulario">
     <div class="mb-3">
       <label class="form-label">Host: </label>
       <input
         type="text"
         class="form-control"
-        [(ngModel)]="credentials.host"
+        formControlName="host"
         id="host"
         name="host"
         required
       />
+      <div *ngIf="validarInputs(formulario.get('host'))" class="text-danger">
+        El host es requerido.
+      </div>
     </div>
     <div class="mb-3">
-      <label for="puerto" class="form-label">Puerto:</label>
+      <label for="port" class="form-label">Puerto:</label>
       <input
         type="number"
         class="form-control"
-        [(ngModel)]="credentials.puerto"
-        id="puerto"
-        name="puerto"
+        formControlName="port"
+        id="port"
+        name="port"
         required
       />
+      <div *ngIf="validarInputs(formulario.get('port'))" class="text-danger">
+        El puerto es requerido.
+      </div>
     </div>
     <div class="mb-3">
-      <label for="nombre_base_de_datos" class="form-label"
+      <label for="database_name" class="form-label"
         >Nombre de la base de datos:</label
       >
       <input
         type="text"
-        [(ngModel)]="credentials.nombre_base_de_datos"
+        formControlName="database_name"
         class="form-control"
-        id="nombre_base_de_datos"
-        name="nombre_base_de_datos"
+        id="database_name"
+        name="database_name"
         required
       />
+      <div
+        *ngIf="validarInputs(formulario.get('database_name'))"
+        class="text-danger"
+      >
+        El nombre de la base de datos es requerido.
+      </div>
     </div>
     <div class="mb-3">
-      <label for="usuario" class="form-label">Usuario:</label>
+      <label for="user" class="form-label">Usuario:</label>
       <input
         type="text"
-        [(ngModel)]="credentials.usuario"
+        formControlName="user"
         class="form-control"
-        id="usuario"
-        name="usuario"
+        id="user"
+        name="user"
         required
       />
+      <div *ngIf="validarInputs(formulario.get('user'))" class="text-danger">
+        El nombre de usuario es requerido.
+      </div>
     </div>
     <div class="mb-3">
-      <label for="contrasena" class="form-label">Contraseña:</label>
+      <label for="password" class="form-label">Contraseña:</label>
       <input
         type="password"
         class="form-control"
-        [(ngModel)]="credentials.contrasena"
-        id="contrasena"
-        name="contrasena"
+        formControlName="password"
+        id="password"
+        name="password"
         required
       />
+      <div
+        *ngIf="validarInputs(formulario.get('password'))"
+        class="text-danger"
+      >
+        La contraseña es requerido.
+      </div>
     </div>
 
     <!--
@@ -70,6 +91,7 @@
       id="submitButton"
       type="submit"
       title="Login"
+      [disabled]="!formulario.valid"
     >
       Iniciar sesión
     </button>
