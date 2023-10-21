@@ -48,13 +48,8 @@ export class ListSeriesComponent {
   }
 
   seleccionarRegistro(registro: Serie) {
-    if (registro.estado === 'AN') {
-      this.mensajeAnulado = true;
-    } else {
-      this.mensajeAnulado = false;
-      this.registroSeleccionado = registro;
-      console.log(this.registroSeleccionado);
-    }
+    this.registroSeleccionado = registro;
+    console.log(this.registroSeleccionado);
   }
 
   abrirModalNuevo() {
@@ -74,7 +69,7 @@ export class ListSeriesComponent {
   abrirModalModificacion(registro?: Serie) {
     const modalRef = this.modalServ.open(UpdateSeriesComponent);
     if (registro !== undefined) {
-      modalRef.componentInstance.serie = registro;
+      modalRef.componentInstance.idSerie = registro.id_serie;
       modalRef.result.then((result: string) => {
         if (result === 'success') {
           // El modal fue cerrado con éxito
@@ -93,7 +88,7 @@ export class ListSeriesComponent {
   abrirModalAnulacion(registro?: Serie) {
     const modalRef = this.modalServ.open(EstadoSeriesComponent);
     if (registro !== undefined) {
-      modalRef.componentInstance.serie = registro;
+      modalRef.componentInstance.idSerie = registro.id_serie;
       modalRef.result.then((result: string) => {
         if (result === 'success') {
           // El modal fue cerrado con éxito
@@ -112,7 +107,7 @@ export class ListSeriesComponent {
   abrirModalEliminacion(registro?: Serie) {
     const modalRef = this.modalServ.open(DeleteSeriesComponent);
     if (registro !== undefined) {
-      modalRef.componentInstance.serie = registro;
+      modalRef.componentInstance.idSerie = registro.id_serie;
       modalRef.result.then((result: string) => {
         if (result === 'success') {
           // El modal fue cerrado con éxito
