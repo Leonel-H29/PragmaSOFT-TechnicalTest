@@ -1,1 +1,24 @@
-<p>estado-series works!</p>
+<div class="modal-header">
+  <h5 class="modal-title">Anular Registro</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <p>¿Estás seguro de que deseas anular el registro?</p>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="modal.dismiss('Cancel click')"
+  >
+    Cancelar
+  </button>
+  <button type="button" class="btn btn-danger" (click)="anularRegistro()">
+    Anular
+  </button>
+</div>

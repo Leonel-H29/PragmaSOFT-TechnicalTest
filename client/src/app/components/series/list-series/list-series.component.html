@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col">ID</th>
         <th scope="col">Título</th>
         <th scope="col">Descripción</th>
         <th scope="col">Fecha de estreno</th>
@@ -27,6 +28,7 @@
             />
           </div>
         </td>
+        <td>{{ serie.id_serie }}</td>
         <td>{{ serie.titulo }}</td>
         <td>{{ serie.descripcion }}</td>
         <td>{{ serie.fecha_estreno | date : "dd/MM/y" }}</td>
@@ -77,7 +79,13 @@
       >
         Modificar
       </button>
-      <button class="btn btn-secondary me-2" type="button">Anular</button>
+      <button
+        class="btn btn-secondary me-2"
+        type="button"
+        (click)="abrirModalAnulacion(registroSeleccionado)"
+      >
+        Anular
+      </button>
       <button
         class="btn btn-danger me-2"
         type="button"
