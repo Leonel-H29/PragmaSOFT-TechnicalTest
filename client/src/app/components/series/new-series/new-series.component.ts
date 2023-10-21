@@ -22,11 +22,6 @@ export class NewSeriesComponent {
     { text: 'Otro', value: 'Otro' },
   ];
 
-  //  estados = [
-  //    { codigo: 'AC', descripcion: 'Activa' },
-  //    { codigo: 'AN', descripcion: 'Inactiva' },
-  // ];
-
   constructor(
     public modal: NgbActiveModal,
     private fb: FormBuilder,

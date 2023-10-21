@@ -67,59 +67,63 @@ export class ListSeriesComponent {
   }
 
   abrirModalModificacion(registro?: Serie) {
-    const modalRef = this.modalServ.open(UpdateSeriesComponent);
-    if (registro !== undefined) {
-      modalRef.componentInstance.idSerie = registro.id_serie;
-      modalRef.result.then((result: string) => {
-        if (result === 'success') {
-          // El modal fue cerrado con éxito
-          console.log('Exito');
-          this.GetSeries();
-        } else {
-          // El modal fue cerrado con cancelar u otro evento
-          console.log('Error');
-        }
-      });
-    } else {
-      alert('Error en el registro');
+    if (registro == undefined) {
+      alert('Debes seleccionar al menos un registro!');
+      return;
     }
+
+    const modalRef = this.modalServ.open(UpdateSeriesComponent);
+
+    modalRef.componentInstance.idSerie = registro.id_serie;
+    modalRef.result.then((result: string) => {
+      if (result === 'success') {
+        // El modal fue cerrado con éxito
+        console.log('Exito');
+        this.GetSeries();
+      } else {
+        // El modal fue cerrado con cancelar u otro evento
+        console.log('Error');
+      }
+    });
   }
 
   abrirModalAnulacion(registro?: Serie) {
-    const modalRef = this.modalServ.open(EstadoSeriesComponent);
-    if (registro !== undefined) {
-      modalRef.componentInstance.idSerie = registro.id_serie;
-      modalRef.result.then((result: string) => {
-        if (result === 'success') {
-          // El modal fue cerrado con éxito
-          console.log('Exito');
-          this.GetSeries();
-        } else {
-          // El modal fue cerrado con cancelar u otro evento
-          console.log('Error');
-        }
-      });
-    } else {
-      alert('Error en el registro');
+    if (registro == undefined) {
+      alert('Debes seleccionar al menos un registro!');
+      return;
     }
+
+    const modalRef = this.modalServ.open(EstadoSeriesComponent);
+    modalRef.componentInstance.idSerie = registro.id_serie;
+    modalRef.result.then((result: string) => {
+      if (result === 'success') {
+        // El modal fue cerrado con éxito
+        console.log('Exito');
+        this.GetSeries();
+      } else {
+        // El modal fue cerrado con cancelar u otro evento
+        console.log('Error');
+      }
+    });
   }
 
   abrirModalEliminacion(registro?: Serie) {
-    const modalRef = this.modalServ.open(DeleteSeriesComponent);
-    if (registro !== undefined) {
-      modalRef.componentInstance.idSerie = registro.id_serie;
-      modalRef.result.then((result: string) => {
-        if (result === 'success') {
-          // El modal fue cerrado con éxito
-          console.log('Exito');
-          this.GetSeries();
-        } else {
-          // El modal fue cerrado con cancelar u otro evento
-          console.log('Error');
-        }
-      });
-    } else {
-      alert('Error en el registro');
+    if (registro == undefined) {
+      alert('Debes seleccionar al menos un registro!');
+      return;
     }
+    const modalRef = this.modalServ.open(DeleteSeriesComponent);
+
+    modalRef.componentInstance.idSerie = registro.id_serie;
+    modalRef.result.then((result: string) => {
+      if (result === 'success') {
+        // El modal fue cerrado con éxito
+        console.log('Exito');
+        this.GetSeries();
+      } else {
+        // El modal fue cerrado con cancelar u otro evento
+        console.log('Error');
+      }
+    });
   }
 }

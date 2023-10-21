@@ -41,7 +41,7 @@ export class UpdateSeriesComponent {
         (data) => {
           this.serie = data;
           console.log('Data: ', this.serie);
-          // Resto del código...
+
           //Defino el formulario con sus valores iniciales
           this.formulario = this.fb.group({
             titulo: [
@@ -70,8 +70,19 @@ export class UpdateSeriesComponent {
                 Validators.max(100000000),
               ],
             ],
-            atp: [this.serie.atp, Validators.required],
+            atp: [this.serie.atp],
             estado: [this.serie.estado, Validators.required],
+          });
+
+          this.formulario.statusChanges.subscribe(() => {
+            if (
+              this.formulario.get('atp')?.value !== true &&
+              this.formulario.get('atp')?.value !== false
+            ) {
+              this.formulario.get('atp')?.setErrors({ invalidATPValue: true });
+            } else {
+              this.formulario.get('atp')?.setErrors(null);
+            }
           });
         },
         (err) => {
@@ -79,21 +90,8 @@ export class UpdateSeriesComponent {
         }
       );
     }
-    //if (this.serie?.id_serie) this.idserie = this.serie?.id_serie;
-
-    /*Le quito la restriccion a 'ATP' para que pueda tomar un valor True o False y sea valida para el formulario*/
-    console.log(this.formulario.get('atp')?.value);
-    // this.formulario.statusChanges.subscribe(() => {
-    //   const atpValue = this.formulario.get('atp')?.value;
-    //   if (atpValue !== true && atpValue !== false) {
-    //     this.formulario.get('atp')?.setErrors({ invalidATPValue: true });
-    //   } else {
-    //     this.formulario.get('atp')?.setErrors(null);
-    //   }
-    // });
 
     this.isFormValid = this.formulario.valid;
-    this.errorMessage();
   }
 
   validarInputs(control: any) {
