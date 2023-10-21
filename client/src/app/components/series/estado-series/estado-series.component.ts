@@ -37,7 +37,7 @@ export class EstadoSeriesComponent {
           this.modal.close('success');
         },
         (err) => {
-          alert('Error al cargar la serie');
+          alert('Error al anular la serie');
         }
       );
     } else alert('Hay un error con el ID del registro');

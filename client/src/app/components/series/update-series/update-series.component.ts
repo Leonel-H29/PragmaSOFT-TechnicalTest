@@ -120,7 +120,7 @@ export class UpdateSeriesComponent {
           this.modal.close('success');
         },
         (err) => {
-          alert('Error al cargar la serie');
+          alert('Error al modificar la serie');
         }
       );
     }

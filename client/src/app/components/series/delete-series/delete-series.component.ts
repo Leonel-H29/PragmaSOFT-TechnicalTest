@@ -9,24 +9,24 @@ import { SeriesService } from 'src/app/service/series.service';
   styleUrls: ['./delete-series.component.css'],
 })
 export class DeleteSeriesComponent {
-  @Input() serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC'); // Recibe el objeto Serie desde el componente padre
-  idserie: number = 0;
+  //serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC');
+  @Input() idSerie: number = 0; // Recibe el objeto Serie desde el componente padre
 
   constructor(public modal: NgbActiveModal, private serieServ: SeriesService) {}
 
   ngOnInit(): void {
-    if (this.serie.id_serie) this.idserie = this.serie.id_serie;
+    if (this.idSerie == undefined) alert('Error en el registro!');
   }
 
   eliminarRegistro() {
     // Enviar solicitud de eliminación al servicio o realizar la acción correspondiente
-    this.serieServ.DeleteSerie(this.idserie).subscribe(
+    this.serieServ.DeleteSerie(this.idSerie).subscribe(
       (data) => {
         alert('Serie Eliminada!');
         this.modal.close('success');
       },
       (err) => {
-        alert('Error al cargar la serie');
+        alert('Error al eliminar la serie');
       }
     );
   }
