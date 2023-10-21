@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { min } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { DbSettingsService } from 'src/app/service/db-settings.service';
+import { TokenService } from 'src/app/service/token.service';
 import { esCampoRequerido } from 'src/app/utils/validations-util';
 
 @Component({
@@ -12,8 +13,8 @@ import { esCampoRequerido } from 'src/app/utils/validations-util';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  IsLogged = false;
-  IsLoginFail = false;
+  //IsLogged = false;
+  //IsLoginFail = false;
   loginUser!: User;
 
   formulario!: FormGroup;
@@ -22,13 +23,13 @@ export class LoginComponent {
   constructor(
     private db: DbSettingsService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private token: TokenService
   ) {}
 
   ngOnInit(): void {
-    if (this.db.getToken()) {
-      this.IsLogged = true;
-      this.IsLoginFail = false;
+    if (this.token.getToken()) {
+      this.router.navigate(['admin']);
     }
     this.formulario = this.fb.group({
       host: [
@@ -77,20 +78,21 @@ export class LoginComponent {
       console.log(credentials);
       this.db.Login(credentials).subscribe(
         (data) => {
+          const result = data;
           alert('Conexion con la base de datos exitosa!');
-          this.IsLogged = true;
-          this.IsLoginFail = false;
-          this.db.setToken('true');
+          //console.log(result);
+
+          //console.log(result[0].database, result[0].token);
+
+          this.token.setToken(result[0].token);
+          this.token.setDatabase(result[0].database);
+          this.token.setUsername(result[0].user);
           this.router.navigate(['/admin']);
         },
         (err) => {
           alert('Error al conectar a la base de datos');
-          this.IsLogged = false;
-          this.IsLoginFail = true;
         }
       );
-      // Enviar nuevoRegistro al servicio o realizar la acción correspondiente
-      //this.modal.close('success');
     }
   }
 }

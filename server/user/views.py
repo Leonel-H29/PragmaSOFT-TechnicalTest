@@ -70,13 +70,12 @@ class CustomLoginView(APIView):
 
                     # Generar un token aleatorio
                     random_token = generateToken()
-                    return Response(
-                        {
-                            'token': random_token,
-                            'user': encriptar(credentials['user']),
-                            'database': encriptar(credentials['database_name']),
-                        }, status=status.HTTP_200_OK
-                    )
+                    user_data = {
+                        'token': random_token,
+                        'user': encriptar(credentials['user']),
+                        'database': encriptar(credentials['database_name']),
+                    },
+                    return Response(user_data, status=status.HTTP_200_OK)
 
                 # Generar un token (puedes usar el Token de Django Rest Framework)
                 # token, created = Token.objects.get_or_create(user=None)

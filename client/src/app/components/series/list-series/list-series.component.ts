@@ -8,6 +8,7 @@ import { UpdateSeriesComponent } from '../update-series/update-series.component'
 import { DeleteSeriesComponent } from '../delete-series/delete-series.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EstadoSeriesComponent } from '../estado-series/estado-series.component';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-list-series',
@@ -23,17 +24,12 @@ export class ListSeriesComponent {
 
   constructor(
     private serieServ: SeriesService,
-    private db: DbSettingsService,
     private router: Router,
     private modalServ: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.GetSeries();
-    if (this.db.getToken()) {
-      this.isLogged = true;
-      //this.GetSeries();
-    }
   }
   GetSeries(): void {
     this.serieServ.ListSeries().subscribe(
