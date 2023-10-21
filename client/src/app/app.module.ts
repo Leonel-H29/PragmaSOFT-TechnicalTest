@@ -14,9 +14,10 @@ import { NewSeriesComponent } from './components/series/new-series/new-series.co
 import { UpdateSeriesComponent } from './components/series/update-series/update-series.component';
 import { EditSeriesComponent } from './components/series/edit-series/edit-series.component';
 import { DeleteSeriesComponent } from './components/series/delete-series/delete-series.component';
+import { EstadoSeriesComponent } from './components/series/estado-series/estado-series.component';
 
 @NgModule({
-  declarations: [AppComponent, SeriesComponent, LoginComponent, ListSeriesComponent, NewSeriesComponent, UpdateSeriesComponent, EditSeriesComponent, DeleteSeriesComponent],
+  declarations: [AppComponent, SeriesComponent, LoginComponent, ListSeriesComponent, NewSeriesComponent, UpdateSeriesComponent, EditSeriesComponent, DeleteSeriesComponent, EstadoSeriesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
