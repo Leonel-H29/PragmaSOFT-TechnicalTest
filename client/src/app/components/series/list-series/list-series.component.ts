@@ -70,33 +70,41 @@ export class ListSeriesComponent {
     });
   }
 
-  abrirModalModificacion(registro: Serie) {
+  abrirModalModificacion(registro?: Serie) {
     const modalRef = this.modalServ.open(UpdateSeriesComponent);
-    modalRef.componentInstance.serie = registro;
-    modalRef.result.then((result: string) => {
-      if (result === 'success') {
-        // El modal fue cerrado con éxito
-        console.log('Exito');
-        this.GetSeries();
-      } else {
-        // El modal fue cerrado con cancelar u otro evento
-        console.log('Error');
-      }
-    });
+    if (registro !== undefined) {
+      modalRef.componentInstance.serie = registro;
+      modalRef.result.then((result: string) => {
+        if (result === 'success') {
+          // El modal fue cerrado con éxito
+          console.log('Exito');
+          this.GetSeries();
+        } else {
+          // El modal fue cerrado con cancelar u otro evento
+          console.log('Error');
+        }
+      });
+    } else {
+      alert('Error en el registro');
+    }
   }
 
-  abrirModalEliminacion(registro: Serie) {
+  abrirModalEliminacion(registro?: Serie) {
     const modalRef = this.modalServ.open(DeleteSeriesComponent);
-    modalRef.componentInstance.serie = registro;
-    modalRef.result.then((result: string) => {
-      if (result === 'success') {
-        // El modal fue cerrado con éxito
-        console.log('Exito');
-        this.GetSeries();
-      } else {
-        // El modal fue cerrado con cancelar u otro evento
-        console.log('Error');
-      }
-    });
+    if (registro !== undefined) {
+      modalRef.componentInstance.serie = registro;
+      modalRef.result.then((result: string) => {
+        if (result === 'success') {
+          // El modal fue cerrado con éxito
+          console.log('Exito');
+          this.GetSeries();
+        } else {
+          // El modal fue cerrado con cancelar u otro evento
+          console.log('Error');
+        }
+      });
+    } else {
+      alert('Error en el registro');
+    }
   }
 }

@@ -12,6 +12,20 @@ import { esCampoRequerido } from 'src/app/utils/validations-util';
 })
 export class NewSeriesComponent {
   formulario!: FormGroup;
+  isFormValid?: boolean;
+  generos = [
+    { text: 'Acción', value: 'Accion' },
+    { text: 'Comedia', value: 'Comedia' },
+    { text: 'Drama', value: 'Drama' },
+    { text: 'Fantasía', value: 'Fantasía' },
+    { text: 'Ciencia Ficción', value: 'Ciencia Ficción' },
+    { text: 'Otro', value: 'Otro' },
+  ];
+
+  //  estados = [
+  //    { codigo: 'AC', descripcion: 'Activa' },
+  //    { codigo: 'AN', descripcion: 'Inactiva' },
+  // ];
 
   constructor(
     public modal: NgbActiveModal,
@@ -57,6 +71,7 @@ export class NewSeriesComponent {
       }
     });
     //console.log(this.formulario.value);
+    this.isFormValid = this.formulario.valid;
   }
 
   validarInputs(control: any) {

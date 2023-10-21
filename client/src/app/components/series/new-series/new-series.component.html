@@ -76,6 +76,12 @@
     <!--GENERO-->
     <div class="mb-3">
       <label for="genero" class="form-label">Género</label>
+      <select formControlName="genero" class="form-control">
+        <option *ngFor="let genero of generos" [value]="genero.value">
+          {{ genero.text }}
+        </option>
+      </select>
+      <!--
       <input
         type="text"
         class="form-control"
@@ -83,6 +89,7 @@
         formControlName="genero"
         required
       />
+      -->
       <div *ngIf="validarInputs(formulario.get('genero'))" class="text-danger">
         El genero es requerido.
       </div>
@@ -116,6 +123,7 @@
       <label class="form-check-label" for="atp">ATP</label>
     </div>
     <!--ESTADO-->
+    <!--
     <div class="mb-3">
       <label for="estado" class="form-label">Estado</label>
       <input
@@ -126,6 +134,15 @@
         required
       />
     </div>
+    -->
+    <input
+      type="text"
+      class="form-control"
+      id="estado"
+      formControlName="estado"
+      required
+      [hidden]="true"
+    />
     <button
       type="submit"
       class="btn btn-primary"
