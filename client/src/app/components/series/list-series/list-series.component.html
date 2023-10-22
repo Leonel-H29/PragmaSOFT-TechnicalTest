@@ -1,3 +1,17 @@
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button
+    class="btn btn-primary me-md-2"
+    (click)="toggleSearchInput()"
+    *ngIf="!showSearchInput"
+  >
+    Buscar
+  </button>
+</div>
+<app-search-series
+  *ngIf="showSearchInput"
+  (search)="filterData($event)"
+></app-search-series>
+<br />
 <div *ngIf="list_series.length > 0; else noDataMessage">
   <table class="table">
     <thead>
