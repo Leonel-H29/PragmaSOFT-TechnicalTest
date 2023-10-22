@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
   { path: 'admin', component: SeriesComponent },
   { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }, // Ruta por defecto en caso de ruta no encontrada
 ];
 
 @NgModule({
