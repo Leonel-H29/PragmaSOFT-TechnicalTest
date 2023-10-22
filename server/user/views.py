@@ -1,17 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, viewsets
-from rest_framework.decorators import action
-from rest_framework.exceptions import APIException
-import jwt
+from rest_framework import status
 import random
-from datetime import datetime, timedelta
 from psycopg2 import connect, OperationalError
-from rest_framework.authtoken.models import Token
 import hashlib
 from django.conf import settings
-# Model
-from user.models import Usuario
 
 # Serializers
 from user.serializers import UserLoginSerializer
@@ -93,6 +86,12 @@ def generateToken():
 
 
 class CustomLoginView(APIView):
+
+    """
+    Clase para la vista de inicio de sesion, es donde la API recibe las credenciales del la base de datos 
+    por medio del cliente, realiza las evaluciones correspondiente y envia una respuesta al cliente.
+    """
+
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
@@ -100,12 +99,15 @@ class CustomLoginView(APIView):
 
             # Intentar conectar a la base de datos
             try:
-                if conect_db(host=credentials['host'],
-                             port=credentials['port'],
-                             dbname=credentials['database_name'],
-                             username=credentials['user'],
-                             passw=credentials['password']):
+                connection = conect_db(
+                    host=credentials['host'],
+                    port=credentials['port'],
+                    dbname=credentials['database_name'],
+                    username=credentials['user'],
+                    passw=credentials['password']
+                )
 
+                if connection:
                     # Generar un token aleatorio
                     random_token = generateToken()
                     user_data = {
