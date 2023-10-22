@@ -117,7 +117,19 @@ DATABASES = {
         # "HOST": config("DB_HOST"),
         # "DATABASE_PORT": config("DB_PORT"),
     },
+
+    "db_series": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "series",
+        "USER": "leonel",
+        "PASSWORD": "123456",
+        "HOST": "localhost",
+        "DATABASE_PORT": 5432,
+    },
+
 }
+
+DATABASE_ROUTERS = ['backend.routers.ProductionRouter']
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ("JWT", "Bearer", "Token"),
 }
