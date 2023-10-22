@@ -20,6 +20,10 @@ export class ListSeriesComponent {
   registroSeleccionado!: Serie;
   mensajeAnulado = false;
 
+  modalUpdate = UpdateSeriesComponent;
+  modalAnulacion = EstadoSeriesComponent;
+  modalDelete = DeleteSeriesComponent;
+
   constructor(private serieServ: SeriesService, private modalServ: NgbModal) {}
 
   ngOnInit(): void {
@@ -56,54 +60,23 @@ export class ListSeriesComponent {
     });
   }
 
-  abrirModalModificacion(registro?: Serie) {
+  abrirModal(
+    registro?: Serie,
+    anyComponent?:
+      | typeof UpdateSeriesComponent
+      | typeof EstadoSeriesComponent
+      | typeof DeleteSeriesComponent
+  ) {
+    if (this.list_series.length == 0) {
+      alert('No se puede realizar con una lista vacia');
+      return;
+    }
     if (registro == undefined) {
       alert('Debes seleccionar al menos un registro!');
       return;
     }
 
-    const modalRef = this.modalServ.open(UpdateSeriesComponent);
-
-    modalRef.componentInstance.idSerie = registro.id_serie;
-    modalRef.result.then((result: string) => {
-      if (result === 'success') {
-        // El modal fue cerrado con éxito
-        console.log('Exito');
-        this.GetSeries();
-      } else {
-        // El modal fue cerrado con cancelar u otro evento
-        console.log('Error');
-      }
-    });
-  }
-
-  abrirModalAnulacion(registro?: Serie) {
-    if (registro == undefined) {
-      alert('Debes seleccionar al menos un registro!');
-      return;
-    }
-
-    const modalRef = this.modalServ.open(EstadoSeriesComponent);
-    modalRef.componentInstance.idSerie = registro.id_serie;
-    modalRef.result.then((result: string) => {
-      if (result === 'success') {
-        // El modal fue cerrado con éxito
-        console.log('Exito');
-        this.GetSeries();
-      } else {
-        // El modal fue cerrado con cancelar u otro evento
-        console.log('Error');
-      }
-    });
-  }
-
-  abrirModalEliminacion(registro?: Serie) {
-    if (registro == undefined) {
-      alert('Debes seleccionar al menos un registro!');
-      return;
-    }
-    const modalRef = this.modalServ.open(DeleteSeriesComponent);
-
+    const modalRef = this.modalServ.open(anyComponent);
     modalRef.componentInstance.idSerie = registro.id_serie;
     modalRef.result.then((result: string) => {
       if (result === 'success') {
