@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from psycopg2 import connect, OperationalError
 from rest_framework.authtoken.models import Token
 import hashlib
+from django.conf import settings
 # Model
 from user.models import Usuario
 
@@ -17,16 +18,48 @@ from user.serializers import UserLoginSerializer
 
 
 def conect_db(host, username, passw, dbname, port):
-    """Retorna la conexion a la DB."""
-    return (
-        connect(
+    """
+    Esta función retorna la conexion a la DB en base a los parametros enviados por el usuario
+
+
+    Args:
+        host (int): Direccion de Host de la base de datos.
+        username (str): El nombre de usuario que desea ingresar a la base de datos.
+        passw (str): La contraseña del usuario.
+        dbname (str): El nombre de la base de datos a la que queremos acceder.
+        port (str): El puerto donde se ejecuta la base de datos.
+
+
+    Returns:
+        connection: El valor me indica si se establecio o no la conexion
+    """
+
+    # Verificar si las credenciales coinciden con las configuradas en settings.py
+    db_settings = settings.DATABASES.get('db_series')
+
+    print(db_settings['HOST'], db_settings['DATABASE_PORT'],
+          db_settings['NAME'], db_settings['USER'], db_settings['PASSWORD'])
+
+    is_db = (
+        host == db_settings['HOST'] and
+        port == db_settings['DATABASE_PORT'] and
+        dbname == db_settings['NAME'] and
+        username == db_settings['USER'] and
+        passw == db_settings['PASSWORD']
+    )
+
+    if is_db:
+        # Realizo a la conexion a la base de datos
+        connection = connect(
             host=host,
             user=username,
             password=passw,
             database=dbname,
             port=port
         )
-    )
+        return connection
+
+    return None
 
 
 def encriptar(sting_to_hash):
@@ -49,7 +82,12 @@ def encriptar(sting_to_hash):
 
 
 def generateToken():
-    """Genera un Token aleatorio."""
+    """
+    Esta funcion genera un Token aleatorio.
+
+    Returns:
+        str: El Token generado.
+    """
     return ''.join(random.choices(
         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=40))
 
@@ -76,11 +114,6 @@ class CustomLoginView(APIView):
                         'database': encriptar(credentials['database_name']),
                     },
                     return Response(user_data, status=status.HTTP_200_OK)
-
-                # Generar un token (puedes usar el Token de Django Rest Framework)
-                # token, created = Token.objects.get_or_create(user=None)
-
-                # return Response({'token': token.key}, status=status.HTTP_200_OK)
                 return Response({'error': 'Las credenciales son incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
             except OperationalError:
                 return Response({'error': 'Error del sevidor'}, status=status.HTTP_400_BAD_REQUEST)
