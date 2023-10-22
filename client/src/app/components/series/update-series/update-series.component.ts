@@ -99,9 +99,6 @@ export class UpdateSeriesComponent {
   }
 
   errorMessage() {
-    if (this.serie === undefined)
-      return (this.errorMge = 'Debes seleccionar un registro!');
-
     if (this.serie.estado === 'AN')
       return (this.errorMge = 'No se puede modificar una serie inactiva!');
 

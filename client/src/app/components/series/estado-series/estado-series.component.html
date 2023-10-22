@@ -1,24 +1,52 @@
-<div class="modal-header">
-  <h5 class="modal-title">Anular Registro</h5>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    (click)="modal.dismiss('Cross click')"
-  ></button>
+<div *ngIf="serie != undefined && serie.estado !== 'AN'; else errorMsje">
+  <div class="modal-header">
+    <h5 class="modal-title">Anular Registro</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>¿Estás seguro de que deseas anular el registro?</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.dismiss('Cancel click')"
+    >
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="anularRegistro()">
+      Anular
+    </button>
+  </div>
 </div>
-<div class="modal-body">
-  <p>¿Estás seguro de que deseas anular el registro?</p>
-</div>
-<div class="modal-footer">
-  <button
-    type="button"
-    class="btn btn-secondary"
-    (click)="modal.dismiss('Cancel click')"
-  >
-    Cancelar
-  </button>
-  <button type="button" class="btn btn-danger" (click)="anularRegistro()">
-    Anular
-  </button>
-</div>
+
+<ng-template #errorMsje>
+  <div class="modal-header">
+    <h5 class="modal-title">Editar Registro</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-warning" role="alert">
+      {{ errorMessage() }}
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.dismiss('Cancel click')"
+    >
+      OK
+    </button>
+  </div>
+</ng-template>

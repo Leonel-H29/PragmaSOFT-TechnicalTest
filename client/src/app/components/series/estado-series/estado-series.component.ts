@@ -11,7 +11,7 @@ import { SeriesService } from 'src/app/service/series.service';
 export class EstadoSeriesComponent {
   serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC');
   @Input() idSerie: number = 0; // Recibe el objeto Serie desde el componente padre
-
+  errorMge: string = '';
   constructor(public modal: NgbActiveModal, private serieServ: SeriesService) {}
 
   ngOnInit(): void {
@@ -25,6 +25,13 @@ export class EstadoSeriesComponent {
         }
       );
     }
+  }
+
+  errorMessage() {
+    if (this.serie.estado === 'AN')
+      return (this.errorMge = 'No se puede anular una serie ya inactiva!');
+
+    return '';
   }
 
   anularRegistro() {
