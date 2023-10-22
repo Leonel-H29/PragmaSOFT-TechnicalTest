@@ -11,7 +11,7 @@ export class SeriesComponent {
   constructor(private router: Router, private token: TokenService) {}
   ngOnInit(): void {
     //Si el usuario no esta logueado entonces se redigira a la pagina de inicio de sesion
-    if (!this.token.getToken()) {
+    if (!this.token.isLogged()) {
       this.router.navigate(['/login']);
     }
   }

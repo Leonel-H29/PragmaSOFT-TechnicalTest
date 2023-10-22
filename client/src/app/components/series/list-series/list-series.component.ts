@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Serie } from 'src/app/model/series';
-import { DbSettingsService } from 'src/app/service/db-settings.service';
 import { SeriesService } from 'src/app/service/series.service';
 import { NewSeriesComponent } from '../new-series/new-series.component';
 import { UpdateSeriesComponent } from '../update-series/update-series.component';
 import { DeleteSeriesComponent } from '../delete-series/delete-series.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EstadoSeriesComponent } from '../estado-series/estado-series.component';
-import { TokenService } from 'src/app/service/token.service';
+import { LogoutComponent } from '../../logout/logout.component';
 
 @Component({
   selector: 'app-list-series',
@@ -22,11 +20,7 @@ export class ListSeriesComponent {
   registroSeleccionado!: Serie;
   mensajeAnulado = false;
 
-  constructor(
-    private serieServ: SeriesService,
-    private router: Router,
-    private modalServ: NgbModal
-  ) {}
+  constructor(private serieServ: SeriesService, private modalServ: NgbModal) {}
 
   ngOnInit(): void {
     this.GetSeries();
@@ -116,6 +110,20 @@ export class ListSeriesComponent {
         // El modal fue cerrado con éxito
         console.log('Exito');
         this.GetSeries();
+      } else {
+        // El modal fue cerrado con cancelar u otro evento
+        console.log('Error');
+      }
+    });
+  }
+
+  abrirModalLogout() {
+    const modalRef = this.modalServ.open(LogoutComponent);
+
+    modalRef.result.then((result: string) => {
+      if (result === 'success') {
+        // El modal fue cerrado con éxito
+        console.log('Exito');
       } else {
         // El modal fue cerrado con cancelar u otro evento
         console.log('Error');

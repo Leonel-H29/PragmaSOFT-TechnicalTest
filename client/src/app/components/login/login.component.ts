@@ -28,8 +28,8 @@ export class LoginComponent {
   ) {}
 
   ngOnInit(): void {
-    if (this.token.getToken()) {
-      this.router.navigate(['admin']);
+    if (this.token.isLogged()) {
+      this.router.navigate(['admin/']);
     }
     this.formulario = this.fb.group({
       host: [

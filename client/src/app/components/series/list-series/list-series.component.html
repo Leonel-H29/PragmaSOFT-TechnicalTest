@@ -68,6 +68,7 @@
       <button
         class="btn btn-success me-2"
         type="button"
+        title="Cargar nueva serie"
         (click)="abrirModalNuevo()"
       >
         Nuevo
@@ -75,6 +76,7 @@
       <button
         class="btn btn-warning me-2"
         type="button"
+        title="Modificar serie"
         (click)="abrirModalModificacion(registroSeleccionado)"
       >
         Modificar
@@ -82,6 +84,7 @@
       <button
         class="btn btn-secondary me-2"
         type="button"
+        title="Anular serie"
         (click)="abrirModalAnulacion(registroSeleccionado)"
       >
         Anular
@@ -89,12 +92,20 @@
       <button
         class="btn btn-danger me-2"
         type="button"
+        title="Eliminar serie"
         (click)="abrirModalEliminacion(registroSeleccionado)"
       >
         Eliminar
       </button>
     </div>
-    <button class="btn btn-primary" type="button">Salir</button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      title="Cerrar la sesión"
+      (click)="abrirModalLogout()"
+    >
+      Salir
+    </button>
   </div>
 </div>
 

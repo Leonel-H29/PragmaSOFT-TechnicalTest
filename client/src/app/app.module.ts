@@ -14,6 +14,7 @@ import { NewSeriesComponent } from './components/series/new-series/new-series.co
 import { UpdateSeriesComponent } from './components/series/update-series/update-series.component';
 import { DeleteSeriesComponent } from './components/series/delete-series/delete-series.component';
 import { EstadoSeriesComponent } from './components/series/estado-series/estado-series.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { EstadoSeriesComponent } from './components/series/estado-series/estado-
     UpdateSeriesComponent,
     DeleteSeriesComponent,
     EstadoSeriesComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
