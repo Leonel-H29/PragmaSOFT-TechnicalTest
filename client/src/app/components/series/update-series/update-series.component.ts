@@ -24,8 +24,8 @@ export class UpdateSeriesComponent {
     { text: 'Acción', value: 'Accion' },
     { text: 'Comedia', value: 'Comedia' },
     { text: 'Drama', value: 'Drama' },
-    { text: 'Fantasía', value: 'Fantasía' },
-    { text: 'Ciencia Ficción', value: 'Ciencia Ficción' },
+    { text: 'Fantasía', value: 'Fantasia' },
+    { text: 'Ciencia Ficción', value: 'Ciencia Ficcion' },
     { text: 'Otro', value: 'Otro' },
   ];
 

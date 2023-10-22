@@ -46,6 +46,19 @@ export class ListSeriesComponent {
     console.log(this.registroSeleccionado);
   }
 
+  limpiarRegistro() {
+    this.registroSeleccionado = new Serie(
+      '',
+      '',
+      new Date(),
+      0,
+      '',
+      0,
+      false,
+      'AC'
+    );
+  }
+
   abrirModalNuevo() {
     const modalRef = this.modalServ.open(NewSeriesComponent);
     modalRef.result.then((result: string) => {
@@ -61,7 +74,6 @@ export class ListSeriesComponent {
   }
 
   abrirModal(
-    registro?: Serie,
     anyComponent?:
       | typeof UpdateSeriesComponent
       | typeof EstadoSeriesComponent
@@ -71,17 +83,18 @@ export class ListSeriesComponent {
       alert('No se puede realizar con una lista vacia');
       return;
     }
-    if (registro == undefined) {
+    if (!this.registroSeleccionado || !this.registroSeleccionado.id_serie) {
       alert('Debes seleccionar al menos un registro!');
       return;
     }
 
     const modalRef = this.modalServ.open(anyComponent);
-    modalRef.componentInstance.idSerie = registro.id_serie;
+    modalRef.componentInstance.idSerie = this.registroSeleccionado.id_serie;
     modalRef.result.then((result: string) => {
       if (result === 'success') {
         // El modal fue cerrado con éxito
         console.log('Exito');
+        this.limpiarRegistro();
         this.GetSeries();
       } else {
         // El modal fue cerrado con cancelar u otro evento
