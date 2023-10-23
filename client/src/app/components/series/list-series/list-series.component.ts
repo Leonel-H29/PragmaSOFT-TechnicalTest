@@ -16,10 +16,8 @@ import { LogoutComponent } from '../../logout/logout.component';
 export class ListSeriesComponent implements OnInit {
   list_series: Serie[] = new Array<Serie>();
   list_filter: Serie[] = new Array<Serie>();
-  isLogged = false;
-  hasPermission = false;
+
   registroSeleccionado!: Serie;
-  mensajeAnulado = false;
   showSearchInput = false;
 
   modalUpdate = UpdateSeriesComponent;
@@ -31,6 +29,11 @@ export class ListSeriesComponent implements OnInit {
   ngOnInit(): void {
     this.GetSeries();
   }
+
+  /**
+   * `GetSeries` = La funcion me permite traer el listado de todas las series
+   * y guardar los datos obtenidos en la variable `list_series`
+   */
   GetSeries(): void {
     this.serieServ.ListSeries().subscribe(
       (data) => {
@@ -43,10 +46,23 @@ export class ListSeriesComponent implements OnInit {
     );
   }
 
+  /**
+   * `seleccionarRegistro`: La funcion me permite seleccionar a un registro
+   * especifico de la tabla y almacena los datos dentro de la variable
+   * `registroSeleccionado`
+   *
+   * @param registro : `Serie` = Registro seleccionado
+   */
   seleccionarRegistro(registro: Serie) {
     this.registroSeleccionado = registro;
-    console.log(this.registroSeleccionado);
+    //console.log(this.registroSeleccionado);
   }
+
+  /**
+   * `limpiarRegistro`: La funcion me permite limpiar los datos
+   * de la variable `registroSeleccionado` creando un nuevo
+   * objeto `Serie`
+   */
 
   limpiarRegistro() {
     this.registroSeleccionado = new Serie(
@@ -61,6 +77,10 @@ export class ListSeriesComponent implements OnInit {
     );
   }
 
+  /**
+   * `abrirModalNuevo`:  La funcion permite abrir un modal que contiene el formulario
+   * para ingresar un nuevo registro
+   */
   abrirModalNuevo() {
     const modalRef = this.modalServ.open(NewSeriesComponent);
     modalRef.result.then((result: string) => {
@@ -75,6 +95,14 @@ export class ListSeriesComponent implements OnInit {
     });
   }
 
+  /**
+   * `abrirModal`: Funcion que permite abrir un modal para la edicion, anulacion o eliminacion
+   * de un registro, para ello le debemos pasar el componente correspondiente por parametro
+   * para que nos muestre el modal que necesitamos
+   *
+   * @param anyComponent : `UpdateSeriesComponent | EstadoSeriesComponent | DeleteSeriesComponent`
+   *
+   */
   abrirModal(
     anyComponent?:
       | typeof UpdateSeriesComponent
@@ -105,6 +133,10 @@ export class ListSeriesComponent implements OnInit {
     });
   }
 
+  /**
+   * `abrirModalLogout`:  La funcion permite abrir un modal que le permita al usuario
+   * cerrar o no la sesion
+   */
   abrirModalLogout() {
     const modalRef = this.modalServ.open(LogoutComponent);
 
@@ -119,6 +151,9 @@ export class ListSeriesComponent implements OnInit {
     });
   }
 
+  /**
+   * `toggleSearchInput`: Funcion que permite mostrar el input de busqueda
+   */
   toggleSearchInput() {
     this.showSearchInput = !this.showSearchInput;
     // Si se muestra el input de búsqueda, restaurar la lista completa
@@ -126,7 +161,14 @@ export class ListSeriesComponent implements OnInit {
       this.list_filter = [...this.list_series];
     }
   }
-  filterData(query: string) {
+
+  /**
+   * `filterData`: Funcion que permite realizar los filtros correpondientes en la tabla
+   * a medida que en el input de busqueda el usuario valla escribiendo
+   *
+   * @param query : string = Los datos que valla ingresando el usuario
+   */
+  filterData(query: string): void {
     if (!query) {
       // Si la búsqueda está vacía, restaurar la lista completa
       this.GetSeries(); // Esto debe cargar la lista completa nuevamente
