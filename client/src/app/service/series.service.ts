@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Serie } from '../model/series';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,20 @@ export class SeriesService {
   /** `serieURL`: Direccion especifica de la API a la que se le realizara peticiones*/
   serieURL = 'http://localhost:8000/api/series/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private token: TokenService) {}
+
+  /**
+   * `getHeaders`: Funcion se encargara de crear la cabecera de la solicitud para ser enviada
+   * junto con los datos a la API
+   * @returns `HttpHeaders` = Cabecera con los datos del token
+   */
+  private getHeaders(): HttpHeaders {
+    console.log(this.token.getToken());
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `${this.token.getToken()}`,
+    });
+  }
 
   /**
    * `ListSeries`: La funcion se encarga de enviar una solitud a la API y obtener una lista de las series
@@ -20,7 +34,10 @@ export class SeriesService {
    */
 
   public ListSeries(): Observable<Serie[]> {
-    return this.http.get<Serie[]>(this.serieURL);
+    console.log(this.getHeaders());
+    return this.http.get<Serie[]>(this.serieURL, {
+      headers: this.getHeaders(),
+    });
   }
 
   /**
@@ -31,7 +48,9 @@ export class SeriesService {
    * @returns `object<Serie>` = La serie correspondiente al ID
    */
   public GetSerie(id: number): Observable<Serie> {
-    return this.http.get<Serie>(this.serieURL + id + '/');
+    return this.http.get<Serie>(this.serieURL + id + '/', {
+      headers: this.getHeaders(),
+    });
   }
 
   /**
@@ -41,7 +60,9 @@ export class SeriesService {
    * @param serie : `Serie` = Objeto de la clase `Serie` que contiene los datos para cargar el nuevo registro
    */
   public PostSerie(serie: Serie): Observable<any> {
-    return this.http.post<any>(this.serieURL, serie);
+    return this.http.post<any>(this.serieURL, serie, {
+      headers: this.getHeaders(),
+    });
   }
 
   /**
@@ -52,7 +73,9 @@ export class SeriesService {
    * @param serie : `Serie` = Objeto de la clase `Serie` que contiene los datos que se quieren actualizar
    */
   public UpdateSerie(id: number, serie: Serie): Observable<any> {
-    return this.http.put<any>(this.serieURL + id + '/', serie);
+    return this.http.put<any>(this.serieURL + id + '/', serie, {
+      headers: this.getHeaders(),
+    });
   }
 
   /**
@@ -62,6 +85,8 @@ export class SeriesService {
    * @param id : `number` = Id del registro
    */
   public DeleteSerie(id: number) {
-    return this.http.delete<Serie>(this.serieURL + id + '/');
+    return this.http.delete<Serie>(this.serieURL + id + '/', {
+      headers: this.getHeaders(),
+    });
   }
 }

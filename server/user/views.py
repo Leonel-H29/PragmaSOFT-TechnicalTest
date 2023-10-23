@@ -28,7 +28,8 @@ def conect_db(host, username, passw, dbname, port):
     """
 
     # Verificar si las credenciales coinciden con las configuradas en settings.py
-    db_settings = settings.DATABASES.get('db_series')
+    # db_settings = settings.DATABASES.get('db_series')
+    db_settings = settings.DATABASES.get('default')
 
     print(db_settings['HOST'], db_settings['DATABASE_PORT'],
           db_settings['NAME'], db_settings['USER'], db_settings['PASSWORD'])

@@ -90,8 +90,8 @@ CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        #     "rest_framework.authentication.BasicAuthentication",
-        #     "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         "rest_framework.authentication.TokenAuthentication",
 
@@ -119,18 +119,18 @@ DATABASES = {
         # "DATABASE_PORT": config("DB_PORT"),
     },
 
-    "db_series": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "series",
-        "USER": "leonel",
-        "PASSWORD": "123456",
-        "HOST": "localhost",
-        "DATABASE_PORT": 5432,
-    },
+    # "db_series": {
+    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "NAME": "series",
+    #     "USER": "leonel",
+    #     "PASSWORD": "123456",
+    #     "HOST": "localhost",
+    #     "DATABASE_PORT": 5432,
+    # },
 
 }
 
-DATABASE_ROUTERS = ['backend.routers.ProductionRouter']
+# DATABASE_ROUTERS = ['backend.routers.ProductionRouter']
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ("JWT", "Bearer", "Token"),
 }

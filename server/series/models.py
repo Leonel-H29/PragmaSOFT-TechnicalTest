@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Serie(models.Model):
     OPCIONES_GENERO = [
         ('Accion', 'Acción'),
@@ -16,7 +17,7 @@ class Serie(models.Model):
     ]
 
     id_serie = models.AutoField(primary_key=True)
-    titulo = models.CharField(max_length=30)
+    titulo = models.CharField(max_length=30, unique=True)
     descripcion = models.TextField()
     fecha_estreno = models.DateField()
     estrellas = models.IntegerField()
@@ -27,7 +28,7 @@ class Serie(models.Model):
 
     def __str__(self):
         return self.titulo
-    
+
     class Meta:
         db_table = 'series'
         verbose_name = 'serie'

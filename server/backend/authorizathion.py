@@ -1,4 +1,6 @@
 from rest_framework.permissions import BasePermission
+from django.conf import settings
+from backend.settings import ALLOWED_HOSTS
 
 
 class CustomAuthentication(BasePermission):
@@ -12,4 +14,11 @@ class CustomAuthentication(BasePermission):
     def has_permission(self, request, view):
         # Obtener el token de la cabecera de la petición
         token = request.META.get('HTTP_AUTHORIZATION')
-        return token
+
+        # Obtener la dirección IP del cliente
+        client_ip = request.META.get('REMOTE_ADDR')
+
+        if token and client_ip in ALLOWED_HOSTS:
+            return True
+
+        return False
