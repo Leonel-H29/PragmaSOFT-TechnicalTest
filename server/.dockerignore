@@ -1,0 +1,23 @@
+#Git
+.gitignore
+.git 
+.github
+
+.env
+*venv
+*.vs
+.devcontainer
+
+
+#Backups Databases
+*.sql
+
+#Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+#README
+README.md
+LICENSE
+

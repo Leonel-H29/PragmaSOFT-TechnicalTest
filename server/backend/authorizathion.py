@@ -1,6 +1,7 @@
 from rest_framework.permissions import BasePermission
 from django.conf import settings
-from backend.settings import ALLOWED_HOSTS
+# from backend.settings import ALLOWED_HOSTS
+from backend.settings.production import ALLOWED_HOSTS
 
 
 class CustomAuthentication(BasePermission):
