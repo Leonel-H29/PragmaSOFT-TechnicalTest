@@ -3,13 +3,15 @@ import { Serie } from '../model/series';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeriesService {
   /** `serieURL`: Direccion especifica de la API a la que se le realizara peticiones*/
-  serieURL = 'http://localhost:8000/api/series/';
+  //serieURL = 'http://localhost:8000/api/series/';
+  serieURL = environment.URL + 'series/';
 
   constructor(private http: HttpClient, private token: TokenService) {}
 

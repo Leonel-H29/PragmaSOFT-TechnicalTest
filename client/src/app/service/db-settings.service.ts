@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DbSettingsService {
   /** `authURL`: Direccion especifica de la API a la que se le realizara peticiones*/
-  authURL = 'http://localhost:8000/api/';
+  authURL = environment.URL;
 
   constructor(private http: HttpClient) {}
 
