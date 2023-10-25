@@ -1,6 +1,7 @@
 # PragmaSOFT Technical Test
 
-![Alt text](image.png)
+![image](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/4a28413c-6545-4d3a-884e-09abc29378ef)
+
 
 _Prueba técnica para la empresa PragmaSOFT_: Esta prueba consiste en crear una aplicacion web o de escritorio que le permita al usuario poder conectarse a una base de datos ingresando las credenciales de estas mismas. Es decir:
 
