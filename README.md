@@ -116,11 +116,13 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED         S
 
 - `http://localhost/api/`: Para ingresar a la interfaz grafica de la API de Django Rest Framework
 
-![Alt text](<Captura desde 2023-10-25 14-23-03.png>)
+![Captura desde 2023-10-25 14-23-03](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/c6c4b340-8d45-4c83-8a07-1eb82d17f7a5)
+
 
 - `http://localhost/pgadmin4/`: Para ingresar al administrador de base de datos de Postgres
 
-![Alt text](<Captura desde 2023-10-25 14-25-33.png>)
+![Captura desde 2023-10-25 14-25-33](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/84313a40-6914-4acf-8a40-29e19444163e)
+
 
 ### Frontend (Angular)
 
@@ -139,7 +141,8 @@ ng serve
 
 El frontend estará disponible en `http://localhost:4200/`. Luego debera dirigirse a `login/`
 
-![Alt text](<Captura desde 2023-10-25 14-35-58.png>)
+![Captura desde 2023-10-25 14-35-58](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/03f99196-f6fc-422e-91d0-5eb561a4e3b1)
+
 
 El usuario debe ingresar los datos configurados en:
 
@@ -151,29 +154,35 @@ El usuario debe ingresar los datos configurados en:
 
 Si los datos son correctos la aplicacion lo redirigira a `admin/` en el cual se mostrara el panel de administracion de la base de datos de series
 
-![Login](<Captura desde 2023-10-25 14-37-41.png>)
+![Captura desde 2023-10-25 14-37-41](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/3a696382-83ac-4f2d-9025-ab2d6a22da39)
+
 
 Operaciones
 
 - Dar de alta a una serie
 
-![Alta serie](<Captura desde 2023-10-25 14-37-54.png>)
+![Captura desde 2023-10-25 14-37-54](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/030ba408-20b0-4947-8d10-48819ee52929)
+
 
 - Dar de editar a una serie
 
-![Editar serie](<Captura desde 2023-10-25 14-38-14.png>)
+![Captura desde 2023-10-25 14-38-14](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/125ffc6f-c462-4cd0-84c6-61365c9c17b4)
+
 
 - Anular a una serie
 
 Implica modificar el estado de 'AC' (Activo) a 'AN' (Inactivo)
 
-![Anulacion serie](<Captura desde 2023-10-25 14-38-25.png>)
+![Captura desde 2023-10-25 14-38-25](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/4390a002-6ef8-4d2b-a231-1f41bfdc33af)
 
-![Anulacion serie](<Captura desde 2023-10-25 14-38-32.png>)
+
+![Captura desde 2023-10-25 14-38-32](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/bbbca632-1514-4f0c-9272-571cbcd14f86)
+
 
 - Eliminar a una serie
 
-![Eliminacion serie](<Captura desde 2023-10-25 14-38-51.png>)
+![Captura desde 2023-10-25 14-38-51](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/cb4fb34e-b2d2-4e0e-bc69-5d9551bac027)
+
 
 - Busqueda de registros
 
@@ -185,7 +194,8 @@ Cuando el usuario hace click sobre el boton de buscar le debera aparecer un inpu
 - Precio de Alquiler
 - Estado
 
-![Busquedas de series](<Captura desde 2023-10-25 15-12-21.png>)
+![Captura desde 2023-10-25 15-12-21](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/4623805b-4e63-4444-9062-4d04ac6c1417)
+
 
 > ## _Aclaraciones_
 >
