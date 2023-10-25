@@ -1,5 +1,7 @@
 # PragmaSOFT Technical Test
 
+![Alt text](image.png)
+
 _Prueba técnica para la empresa PragmaSOFT_: Esta prueba consiste en crear una aplicacion web o de escritorio que le permita al usuario poder conectarse a una base de datos ingresando las credenciales de estas mismas. Es decir:
 
 - HOST
@@ -10,7 +12,41 @@ _Prueba técnica para la empresa PragmaSOFT_: Esta prueba consiste en crear una 
 
 Una vez que el usuario se logueo podra realizar diferentes operaciones (`GET`,`POST`,`PUT` y `DELETE`) sobre una base de datos que almacena datos relacionos a series.
 
+Requisitos:
+
+- Requerimientos funcionales del programa Administrador de Series:
+
+  - Pantalla de conexión a la base de datos, que permita ingresar: Servidor Host, puerto, base de datos, usuario y contraseña.
+  - Pantalla AdministradorSeries: ABM y consulta.
+
+    - Botón "Nuevo": todos los campos son requeridos.
+
+      - Lista de datos:
+
+        - **Título (varchar).**
+        - **Descripción (text).**
+        - **Fecha de estreno (date).**
+        - **Estrellas (entero).**
+        - **Género (varchar) (lista de opciones).**
+        - **Precio Alquiler (decimal).**
+        - **ATP (boolean).**
+        - **Estado (varchar 2).**
+
+    - Botón "Modificar: permite la visualización y modificación de registro.
+    - Anulación: validación y mensaje de confirmación,
+    - Eliminación: mensaje de confirmación y eliminación del registro seleccionado.
+    - Botón "Consultar": consulta en base de datos y actualiza los registros en la grilla.
+    - Botón "Salir".
+
 ## Tecnologías Utilizadas
+
+[![Python](https://img.shields.io/badge/Python-3.10.4-3776AB?style=for-the-badge&logo=Python)](https://www.python.org/)
+
+[![Docker](https://img.shields.io/badge/Docker-24.0.2-2496ED?style=for-the-badge&logo=Docker)](https://docs.docker.com/get-started/overview/)
+
+[![DRF](https://img.shields.io/badge/DRF-3.14.0-BA0C2F?style=for-the-badge&logo=Django)](https://www.django-rest-framework.org/)
+
+[![Angular](https://img.shields.io/badge/Angular-16.2.10-BA0C2F?style=for-the-badge&logo=Angular)](https://angular.io/)
 
 - **Backend**: Django Rest Framework
 - **Frontend**: Angular
@@ -62,7 +98,7 @@ git clone https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest.git directorio-
 
 Estas son algunas de las formas más comunes de clonar un repositorio, dependiendo del servicio de alojamiento y las preferencias de autenticación. Elige el método que mejor se adapte a tu caso y comienza a trabajar con el repositorio en tu entorno local.
 
-### Backend (Django)
+### Backend (Django REST FRAMEWOK)
 
 1. Navega al directorio `backend/`.
 2. Crea un archivo `prod.env` con la configuración necesaria:
@@ -123,6 +159,118 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED         S
 
 ![Captura desde 2023-10-25 14-25-33](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/84313a40-6914-4acf-8a40-29e19444163e)
 
+
+### Endpoints de la API
+
+#### Autenticación
+
+- **URL**: `http://localhost:8000/api/login/`
+- **Método**: `POST`
+- **Ejemplo de Cuerpo de la Petición**:
+
+```json
+{
+  "host": "database",
+  "port": 5432,
+  "database_name": "postgres",
+  "user": "postgres",
+  "password": "postgres"
+}
+```
+
+- **Ejemplo de Cuerpo de la Respuesta**:
+
+```json
+[
+  {
+    "token": "iUzGcBEnovH9tMX1q4CvepIjBK07qQ9gl0KqtAR9",
+    "user": "a942b37ccfaf5a813b1432caa209a43b9d144e47ad0de1549c289c253e556cd5",
+    "database": "a942b37ccfaf5a813b1432caa209a43b9d144e47ad0de1549c289c253e556cd5"
+  }
+]
+```
+
+Con el valor del `token` el usuario podra autenticarse y realizar cualquier operacion. Hay que tener en cuenta que el valor del `token` puede modificarse por cada consulta que se le haga al servidor.
+
+#### Series
+
+- **URL**: `http://localhost:8000/api/series/`
+- **Método**: `GET`
+- **Autenticacion**: `Token <token>`
+- **Ejemplo de Respuesta**:
+
+```json
+[
+  {
+    "id": 1,
+    "titulo": "Ejemplo de Serie 1",
+    "descripcion": "Descripción de la serie 1",
+    "fecha_estreno": "2023-10-18",
+    "estrellas": 4,
+    "genero": "Accion",
+    "precio_alquiler": 5.99,
+    "atp": true,
+    "estado": "AC"
+  },
+  {
+    "id": 2,
+    "titulo": "Ejemplo de Serie 2",
+    "descripcion": "Descripción de la serie 2",
+    "fecha_estreno": "2023-10-20",
+    "estrellas": 5,
+    "genero": "Comedia",
+    "precio_alquiler": 7.99,
+    "atp": false,
+    "estado": "AC"
+  }
+]
+```
+
+#### Crear Nueva Serie
+
+- **URL**: `http://localhost:8000/api/series/`
+- **Método**: `POST`
+- **Autenticacion**: `Token <token>`
+- **Ejemplo de Cuerpo de la Petición**:
+
+```json
+{
+  "titulo": "Nueva Serie",
+  "descripcion": "Descripción de la nueva serie",
+  "fecha_estreno": "2023-11-01",
+  "estrellas": 4,
+  "genero": "Drama",
+  "precio_alquiler": 6.99,
+  "atp": true,
+  "estado": "AC"
+}
+```
+
+#### Actualizar Serie
+
+- **URL**: `http://localhost:8000/api/series/<ID_SERIE>`
+- **Método**: `PUT`
+- **Autenticacion**: `Token <token>`
+- **Ejemplo de Cuerpo de la Petición**:
+
+```json
+{
+  "titulo": "Serie Actualizada",
+  "descripcion": "Nueva descripción de la serie",
+  "fecha_estreno": "2023-11-02",
+  "estrellas": 5,
+  "genero": "Fantasia",
+  "precio_alquiler": 8.99,
+  "atp": false,
+  "estado": "AN"
+}
+```
+
+#### Eliminar Serie
+
+- **URL**: `http://localhost:8000/api/series/<ID_SERIE>`
+- **Método**: `DELETE`
+- **Autenticacion**: `Token <token>`
 
 ### Frontend (Angular)
 
@@ -188,17 +336,18 @@ Implica modificar el estado de 'AC' (Activo) a 'AN' (Inactivo)
 
 Cuando el usuario hace click sobre el boton de buscar le debera aparecer un input que le permita filtrar en tiempo real al registro. Los filtros pueden realizarse por los siguientes campos:
 
-- Titulo
-- Descripcion
-- Genero
-- Precio de Alquiler
-- Estado
+> - Titulo
+> - Descripcion
+> - Genero
+> - Precio de Alquiler
+> - Estado
 
 ![Captura desde 2023-10-25 15-12-21](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/4623805b-4e63-4444-9062-4d04ac6c1417)
 
 
 > ## _Aclaraciones_
 >
+> - El usuario cuando inicia sesion se almacenan los datos del token, el nombre del usuario y el nombre de la base de datos dentro del navegador lo que permitiria certificar que el usuario esta logueado. Cuando el usuario cierra la sesion esos datos son borrados.
 > - Para la modificacion, anulacion y eliminacion es necesario: tener al menos un registro en la tabla y seleccionar un solo registro de la tabla.
 > - Para la carga y modificacion todos los inputs son requeridos.
 > - Una vez que el registro sea anulado no se puede modificar o rebocar su anulacion.
