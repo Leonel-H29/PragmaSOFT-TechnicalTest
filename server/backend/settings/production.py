@@ -41,10 +41,19 @@ if POSTGRES_READY:
             "USER": DB_USER,
             "PASSWORD": DB_PASSWORD,
             "HOST": DB_HOST,
-            "DATABASE_PORT": DB_PORT,
+            "DATABASE_PORT": int(DB_PORT),
         },
     }
+# print(DATABASES)
 # Directorio de archivos estaticos
 STATIC_URL = '/static_files/'
 STATIC_ROOT = Path.joinpath(BASE_DIR, 'static_files')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ORIGIN = [
+    "http://localhost:4200",
+]
+CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]

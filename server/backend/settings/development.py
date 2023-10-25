@@ -19,3 +19,10 @@ DATABASES = {
         "DATABASE_PORT": 5432,
     },
 }
+
+# CORS
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ORIGIN = [
+    "http://localhost:4200",
+]

@@ -31,8 +31,7 @@ def conect_db(host, username, passw, dbname, port):
     # db_settings = settings.DATABASES.get('db_series')
     db_settings = settings.DATABASES.get('default')
 
-    print(db_settings['HOST'], db_settings['DATABASE_PORT'],
-          db_settings['NAME'], db_settings['USER'], db_settings['PASSWORD'])
+    # print(f"HOST: {db_settings['HOST']}, PORT: {db_settings['DATABASE_PORT']}, DBNAME: {db_settings['NAME']}, USER: {db_settings['USER']}, PASSW: {db_settings['PASSWORD']}")
 
     is_db = (
         host == db_settings['HOST'] and

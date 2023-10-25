@@ -16,10 +16,9 @@ class CustomAuthentication(BasePermission):
         # Obtener el token de la cabecera de la petición
         token = request.META.get('HTTP_AUTHORIZATION')
 
-        # Obtener la dirección IP del cliente
-        client_ip = request.META.get('REMOTE_ADDR')
-
-        if token and client_ip in ALLOWED_HOSTS:
+        if token:
+            print("Se ha permitido su acceso")
             return True
+        print("Error en la peticion")
 
         return False

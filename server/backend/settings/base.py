@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'series'
+    'series',
+    'apps.core'
 ] + DRF
 
 MIDDLEWARE = [
@@ -74,12 +75,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # CORS
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_ORIGIN = [
-    "http://localhost:4200",
-]
-CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_ORIGIN = [
+#     "http://localhost:4200",
+# ]
+# CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
