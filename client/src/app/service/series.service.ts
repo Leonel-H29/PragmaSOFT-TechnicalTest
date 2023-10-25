@@ -21,7 +21,6 @@ export class SeriesService {
    * @returns `HttpHeaders` = Cabecera con los datos del token
    */
   private getHeaders(): HttpHeaders {
-    console.log(this.token.getToken());
     return new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `${this.token.getToken()}`,
@@ -36,7 +35,6 @@ export class SeriesService {
    */
 
   public ListSeries(): Observable<Serie[]> {
-    console.log(this.getHeaders());
     return this.http.get<Serie[]>(this.serieURL, {
       headers: this.getHeaders(),
     });

@@ -12,6 +12,8 @@ export class DeleteSeriesComponent {
   //serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC');
   @Input() idSerie: number = 0; // Recibe el objeto Serie desde el componente padre
 
+  loading = false;
+
   constructor(public modal: NgbActiveModal, private serieServ: SeriesService) {}
 
   ngOnInit(): void {
@@ -19,13 +21,16 @@ export class DeleteSeriesComponent {
   }
 
   eliminarRegistro() {
+    this.loading = true;
     // Enviar solicitud de eliminación al servicio o realizar la acción correspondiente
     this.serieServ.DeleteSerie(this.idSerie).subscribe(
       (data) => {
+        this.loading = false;
         alert('Serie Eliminada!');
         this.modal.close('success');
       },
       (err) => {
+        this.loading = false;
         alert('Error al eliminar la serie');
       }
     );

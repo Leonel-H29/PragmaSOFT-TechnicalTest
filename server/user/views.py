@@ -115,6 +115,7 @@ class CustomLoginView(APIView):
                         'user': encriptar(credentials['user']),
                         'database': encriptar(credentials['database_name']),
                     },
+                    connection.close()
                     return Response(user_data, status=status.HTTP_200_OK)
                 return Response({'error': 'Las credenciales son incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
             except OperationalError:

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { min } from 'rxjs';
-import { User } from 'src/app/model/user';
 import { DbSettingsService } from 'src/app/service/db-settings.service';
 import { TokenService } from 'src/app/service/token.service';
 import { esCampoRequerido } from 'src/app/utils/validations-util';
@@ -15,7 +13,7 @@ import { esCampoRequerido } from 'src/app/utils/validations-util';
 export class LoginComponent {
   //IsLogged = false;
   //IsLoginFail = false;
-  loginUser!: User;
+  loading = false;
 
   formulario!: FormGroup;
   isFormValid?: boolean;
@@ -31,6 +29,10 @@ export class LoginComponent {
     if (this.token.isLogged()) {
       this.router.navigate(['admin/']);
     }
+    this.setupForm();
+  }
+
+  setupForm() {
     this.formulario = this.fb.group({
       host: [
         '',
@@ -74,22 +76,21 @@ export class LoginComponent {
 
   onLogin(): void {
     if (this.formulario.valid) {
+      this.loading = true; // Activamos el indicador de carga
       const credentials = this.formulario.value;
-      console.log(credentials);
+      //console.log(credentials);
       this.db.Login(credentials).subscribe(
         (data) => {
           const result = data;
+          this.loading = false;
           alert('Conexion con la base de datos exitosa!');
-          //console.log(result);
-
-          //console.log(result[0].database, result[0].token);
-
           this.token.setToken(result[0].token);
           this.token.setDatabase(result[0].database);
           this.token.setUsername(result[0].user);
           this.router.navigate(['/admin']);
         },
         (err) => {
+          this.loading = false;
           alert('Error al conectar a la base de datos');
         }
       );

@@ -38,7 +38,7 @@ export class ListSeriesComponent implements OnInit {
     this.serieServ.ListSeries().subscribe(
       (data) => {
         this.list_series = data;
-        console.log(this.list_series);
+        //console.log(this.list_series);
       },
       (err) => {
         alert('Error al traer los datos');

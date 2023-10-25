@@ -12,6 +12,7 @@ export class EstadoSeriesComponent {
   serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC');
   @Input() idSerie: number = 0; // Recibe el objeto Serie desde el componente padre
   errorMge: string = '';
+  loading = false;
   constructor(public modal: NgbActiveModal, private serieServ: SeriesService) {}
 
   ngOnInit(): void {
@@ -36,14 +37,17 @@ export class EstadoSeriesComponent {
 
   anularRegistro() {
     this.serie.estado = 'AN';
+    this.loading = true;
     if (this.serie) {
       // Enviar solicitud de eliminación al servicio o realizar la acción correspondiente
       this.serieServ.UpdateSerie(this.idSerie, this.serie).subscribe(
         (data) => {
+          this.loading = true;
           alert('Serie Anulada!');
           this.modal.close('success');
         },
         (err) => {
+          this.loading = true;
           alert('Error al anular la serie');
         }
       );

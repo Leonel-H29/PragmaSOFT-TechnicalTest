@@ -1,176 +1,205 @@
-<div *ngIf="serie != undefined && serie.estado !== 'AN'; else errorMsje">
-  <div class="modal-header">
-    <h5 class="modal-title">Editar Registro</h5>
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    ></button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="formulario" (ngSubmit)="guardarRegistroEditado()">
-      <!--TITULO-->
-      <div class="mb-3">
-        <label for="titulo" class="form-label">Título</label>
-        <input
-          type="text"
-          class="form-control"
-          id="titulo"
-          formControlName="titulo"
-          required
-        />
-      </div>
-      <div *ngIf="validarInputs(formulario.get('titulo'))" class="text-danger">
-        El título es requerido.
-      </div>
-      <!--DESCRIPCION-->
-      <div class="mb-3">
-        <label for="descripcion" class="form-label">Descripción</label>
-        <textarea
-          class="form-control"
-          id="descripcion"
-          formControlName="descripcion"
-          required
-        ></textarea>
-        <div
-          *ngIf="validarInputs(formulario.get('descripcion'))"
-          class="text-danger"
-        >
-          La descripción es requerida.
+<div *ngIf="loading; else formContent">
+  <!-- Modal de carga -->
+  <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    [ngStyle]="{ display: loading ? 'flex' : 'none' }"
+    style="align-items: center; justify-content: center"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cargando...</h5>
+        </div>
+        <div class="modal-body text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
       </div>
-      <!--FECHA DE ESTRENO-->
-      <div class="mb-3">
-        <label for="fecha_estreno" class="form-label">Fecha de Estreno</label>
-        <input
-          type="date"
-          class="form-control"
-          id="fecha_estreno"
-          formControlName="fecha_estreno"
-          required
-        />
-        <div
-          *ngIf="validarInputs(formulario.get('fecha_estreno'))"
-          class="text-danger"
-        >
-          La fecha de estreno es requerida.
-        </div>
-      </div>
-      <!--ESTRELLAS-->
-      <div class="mb-3">
-        <label for="estrellas" class="form-label">Estrellas</label>
-        <input
-          type="number"
-          class="form-control"
-          id="estrellas"
-          formControlName="estrellas"
-          required
-        />
-        <div
-          *ngIf="validarInputs(formulario.get('estrellas'))"
-          class="text-danger"
-        >
-          Las estrellas son requeridas.
-        </div>
-      </div>
-      <!--GENERO-->
-      <div class="mb-3">
-        <label for="genero" class="form-label">Género</label>
-        <!--
-        <input
-          type="text"
-          class="form-control"
-          id="genero"
-          formControlName="genero"
-          required
-        />
-        -->
-        <select formControlName="genero" class="form-control">
-          <option *ngFor="let genero of generos" [value]="genero.value">
-            {{ genero.text }}
-          </option>
-        </select>
-        <div
-          *ngIf="validarInputs(formulario.get('precio_alquiler'))"
-          class="text-danger"
-        >
-          El precio de alquiler es requerido.
-        </div>
-      </div>
-      <!--PRECIO DE ALQUILER-->
-      <div class="mb-3">
-        <label for="precio_alquiler" class="form-label"
-          >Precio de Alquiler</label
-        >
-        <input
-          type="number"
-          class="form-control"
-          id="precio_alquiler"
-          formControlName="precio_alquiler"
-          required
-        />
-        <div
-          *ngIf="validarInputs(formulario.get('precio_alquiler'))"
-          class="text-danger"
-        >
-          El precio de alquiler es requerido.
-        </div>
-      </div>
-      <!--APTO PARA TODO PUBLICO-->
-      <div class="mb-3 form-check">
-        <input
-          type="checkbox"
-          class="form-check-input"
-          id="atp"
-          formControlName="atp"
-        />
-        <label class="form-check-label" for="atp">ATP</label>
-      </div>
-      <!--ESTADO-->
-      <!--
-      <div class="mb-3">
-        <label for="estado" class="form-label">Estado</label>
-        <input
-          type="text"
-          class="form-control"
-          id="estado"
-          formControlName="estado"
-          required
-        />
-      </div>
-      -->
-
-      <div *ngIf="!formulario.valid; else validForm">
-        <div class="alert alert-danger" role="alert">
-          Por favor rellene los campos correctamente
-        </div>
-      </div>
-      <ng-template #validForm>
-        <div class="alert alert-success" role="alert">
-          Los campos se llenaron de forma correcta, puede continuar
-        </div>
-      </ng-template>
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="!formulario.valid"
-      >
-        Guardar
-      </button>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary"
-      (click)="modal.dismiss('Cancel click')"
-    >
-      Cancelar
-    </button>
+    </div>
   </div>
 </div>
+
+<ng-template #formContent>
+  <div *ngIf="serie != undefined && serie.estado !== 'AN'; else errorMsje">
+    <div class="modal-header">
+      <h5 class="modal-title">Editar Registro</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formulario" (ngSubmit)="guardarRegistroEditado()">
+        <!--TITULO-->
+        <div class="mb-3">
+          <label for="titulo" class="form-label">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            id="titulo"
+            formControlName="titulo"
+            required
+          />
+        </div>
+        <div
+          *ngIf="validarInputs(formulario.get('titulo'))"
+          class="text-danger"
+        >
+          El título es requerido.
+        </div>
+        <!--DESCRIPCION-->
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea
+            class="form-control"
+            id="descripcion"
+            formControlName="descripcion"
+            required
+          ></textarea>
+          <div
+            *ngIf="validarInputs(formulario.get('descripcion'))"
+            class="text-danger"
+          >
+            La descripción es requerida.
+          </div>
+        </div>
+        <!--FECHA DE ESTRENO-->
+        <div class="mb-3">
+          <label for="fecha_estreno" class="form-label">Fecha de Estreno</label>
+          <input
+            type="date"
+            class="form-control"
+            id="fecha_estreno"
+            formControlName="fecha_estreno"
+            required
+          />
+          <div
+            *ngIf="validarInputs(formulario.get('fecha_estreno'))"
+            class="text-danger"
+          >
+            La fecha de estreno es requerida.
+          </div>
+        </div>
+        <!--ESTRELLAS-->
+        <div class="mb-3">
+          <label for="estrellas" class="form-label">Estrellas</label>
+          <input
+            type="number"
+            class="form-control"
+            id="estrellas"
+            formControlName="estrellas"
+            required
+          />
+          <div
+            *ngIf="validarInputs(formulario.get('estrellas'))"
+            class="text-danger"
+          >
+            Las estrellas son requeridas.
+          </div>
+        </div>
+        <!--GENERO-->
+        <div class="mb-3">
+          <label for="genero" class="form-label">Género</label>
+          <!--
+          <input
+            type="text"
+            class="form-control"
+            id="genero"
+            formControlName="genero"
+            required
+          />
+          -->
+          <select formControlName="genero" class="form-control">
+            <option *ngFor="let genero of generos" [value]="genero.value">
+              {{ genero.text }}
+            </option>
+          </select>
+          <div
+            *ngIf="validarInputs(formulario.get('precio_alquiler'))"
+            class="text-danger"
+          >
+            El precio de alquiler es requerido.
+          </div>
+        </div>
+        <!--PRECIO DE ALQUILER-->
+        <div class="mb-3">
+          <label for="precio_alquiler" class="form-label"
+            >Precio de Alquiler</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="precio_alquiler"
+            formControlName="precio_alquiler"
+            required
+          />
+          <div
+            *ngIf="validarInputs(formulario.get('precio_alquiler'))"
+            class="text-danger"
+          >
+            El precio de alquiler es requerido.
+          </div>
+        </div>
+        <!--APTO PARA TODO PUBLICO-->
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="atp"
+            formControlName="atp"
+          />
+          <label class="form-check-label" for="atp">ATP</label>
+        </div>
+        <!--ESTADO-->
+        <!--
+        <div class="mb-3">
+          <label for="estado" class="form-label">Estado</label>
+          <input
+            type="text"
+            class="form-control"
+            id="estado"
+            formControlName="estado"
+            required
+          />
+        </div>
+        -->
+
+        <div *ngIf="!formulario.valid; else validForm">
+          <div class="alert alert-danger" role="alert">
+            Por favor rellene los campos correctamente
+          </div>
+        </div>
+        <ng-template #validForm>
+          <div class="alert alert-success" role="alert">
+            Los campos se llenaron de forma correcta, puede continuar
+          </div>
+        </ng-template>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!formulario.valid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.dismiss('Cancel click')"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+</ng-template>
 
 <ng-template #errorMsje>
   <div class="modal-header">

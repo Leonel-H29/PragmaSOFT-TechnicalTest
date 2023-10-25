@@ -13,6 +13,7 @@ import { esCampoRequerido } from 'src/app/utils/validations-util';
 export class NewSeriesComponent {
   formulario!: FormGroup;
   isFormValid?: boolean;
+  loading = false;
   generos = [
     { text: 'Acción', value: 'Accion' },
     { text: 'Comedia', value: 'Comedia' },
@@ -29,6 +30,17 @@ export class NewSeriesComponent {
   ) {}
 
   ngOnInit(): void {
+    this.setupForm();
+
+    //console.log(this.formulario.value);
+    this.isFormValid = this.formulario.valid;
+  }
+
+  validarInputs(control: any) {
+    return esCampoRequerido(control);
+  }
+
+  setupForm() {
     //Defino el formulario con sus valores iniciales
     this.formulario = this.fb.group({
       titulo: [
@@ -65,24 +77,21 @@ export class NewSeriesComponent {
         this.formulario.get('atp')?.setErrors(null);
       }
     });
-    //console.log(this.formulario.value);
-    this.isFormValid = this.formulario.valid;
-  }
-
-  validarInputs(control: any) {
-    return esCampoRequerido(control);
   }
 
   guardarNuevoRegistro() {
+    this.loading = true;
     if (this.formulario.valid) {
       const nuevoRegistro = this.formulario.value;
-      console.log(nuevoRegistro);
+      //console.log(nuevoRegistro);
       this.serieServ.PostSerie(nuevoRegistro).subscribe(
         (data) => {
+          this.loading = false;
           alert('Serie agregada!');
           this.modal.close('success');
         },
         (err) => {
+          this.loading = false;
           alert('Error al cargar la serie');
         }
       );
