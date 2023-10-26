@@ -2,7 +2,6 @@
 
 ![image](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/4a28413c-6545-4d3a-884e-09abc29378ef)
 
-
 _Prueba técnica para la empresa PragmaSOFT_: Esta prueba consiste en crear una aplicacion web o de escritorio que le permita al usuario poder conectarse a una base de datos ingresando las credenciales de estas mismas. Es decir:
 
 - HOST
@@ -101,7 +100,7 @@ Estas son algunas de las formas más comunes de clonar un repositorio, dependien
 
 ### Backend (Django REST FRAMEWOK)
 
-1. Navega al directorio `backend/`.
+1. Navega al directorio `server/`.
 2. Crea un archivo `prod.env` con la configuración necesaria:
 
 **Variables de entorno de la base de datos Postgres:**
@@ -155,13 +154,20 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED         S
 
 ![Captura desde 2023-10-25 14-23-03](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/c6c4b340-8d45-4c83-8a07-1eb82d17f7a5)
 
-
 - `http://localhost/pgadmin4/`: Para ingresar al administrador de base de datos de Postgres
 
 ![Captura desde 2023-10-25 14-25-33](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/84313a40-6914-4acf-8a40-29e19444163e)
 
-
 ### Endpoints de la API
+
+| URI                    | METHOD | DESCRIPCION                      | TOKEN REQUIRED |
+| :--------------------- | :----: | :------------------------------- | :------------- |
+| /api/login             |  GET   | Inicio de sesion                 | NO             |
+| /api/series/           |  GET   | Obtener la lista de las series   | SI             |
+| /api/series/id         |  GET   | Obtener una serie por su id      | SI             |
+| /api/series/<Serie>    |  POST  | Dar de alta a una nueva serie    | SI             |
+| /api/series/id/<Serie> |  PUT   | Actualizar a una serie existente | SI             |
+| /api/series/id         | DELETE | Eliminar una serie existente     | SI             |
 
 #### Autenticación
 
@@ -275,7 +281,7 @@ Con el valor del `token` el usuario podra autenticarse y realizar cualquier oper
 
 ### Frontend (Angular)
 
-1. Navega al directorio `frontend/`
+1. Navega al directorio `client/`
 2. Ejecuta el siguiente comando para instalar las dependencias
 
 ```bash
@@ -292,7 +298,6 @@ El frontend estará disponible en `http://localhost:4200/`. Luego debera dirigir
 
 ![Captura desde 2023-10-25 14-35-58](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/03f99196-f6fc-422e-91d0-5eb561a4e3b1)
 
-
 El usuario debe ingresar los datos configurados en:
 
 - `DB_NAME`
@@ -305,18 +310,15 @@ Si los datos son correctos la aplicacion lo redirigira a `admin/` en el cual se 
 
 ![Captura desde 2023-10-25 14-37-41](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/3a696382-83ac-4f2d-9025-ab2d6a22da39)
 
-
 Operaciones
 
 - Dar de alta a una serie
 
 ![Captura desde 2023-10-25 14-37-54](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/030ba408-20b0-4947-8d10-48819ee52929)
 
-
 - Dar de editar a una serie
 
 ![Captura desde 2023-10-25 14-38-14](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/125ffc6f-c462-4cd0-84c6-61365c9c17b4)
-
 
 - Anular a una serie
 
@@ -324,14 +326,11 @@ Implica modificar el estado de 'AC' (Activo) a 'AN' (Inactivo)
 
 ![Captura desde 2023-10-25 14-38-25](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/4390a002-6ef8-4d2b-a231-1f41bfdc33af)
 
-
 ![Captura desde 2023-10-25 14-38-32](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/bbbca632-1514-4f0c-9272-571cbcd14f86)
-
 
 - Eliminar a una serie
 
 ![Captura desde 2023-10-25 14-38-51](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/cb4fb34e-b2d2-4e0e-bc69-5d9551bac027)
-
 
 - Busqueda de registros
 
@@ -344,7 +343,6 @@ Cuando el usuario hace click sobre el boton de buscar le debera aparecer un inpu
 > - Estado
 
 ![Captura desde 2023-10-25 15-12-21](https://github.com/Leonel-H29/PragmaSOFT-TechnicalTest/assets/48606307/4623805b-4e63-4444-9062-4d04ac6c1417)
-
 
 > ## _Aclaraciones_
 >
