@@ -1,3 +1,7 @@
+/**
+ * `Serie`: clase definida para poder recibir los datos de la API y convertirlos a un objeto de esta clase
+ */
+
 export class Serie {
   id_serie?: number;
   titulo: string;

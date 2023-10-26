@@ -26,6 +26,10 @@ export class ListSeriesComponent implements OnInit {
 
   constructor(private serieServ: SeriesService, private modalServ: NgbModal) {}
 
+  /**
+   * El propósito de `ngOnInit` es realizar tareas de inicialización o configuración
+   * que son necesarias antes de que el componente se renderice en la vista.
+   */
   ngOnInit(): void {
     this.GetSeries();
   }

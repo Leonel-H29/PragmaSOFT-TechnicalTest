@@ -11,12 +11,13 @@ import { esCampoRequerido } from 'src/app/utils/validations-util';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  //IsLogged = false;
-  //IsLoginFail = false;
+  /**
+   * `loading`: Variable booleana utilizada para determinar cuando mostrar
+   * el modal de 'Cargando ...'
+   */
   loading = false;
 
   formulario!: FormGroup;
-  isFormValid?: boolean;
 
   constructor(
     private db: DbSettingsService,
@@ -25,6 +26,10 @@ export class LoginComponent {
     private token: TokenService
   ) {}
 
+  /**
+   * El propósito de `ngOnInit` es realizar tareas de inicialización o configuración
+   * que son necesarias antes de que el componente se renderice en la vista.
+   */
   ngOnInit(): void {
     if (this.token.isLogged()) {
       this.router.navigate(['admin/']);
@@ -32,6 +37,9 @@ export class LoginComponent {
     this.setupForm();
   }
 
+  /**
+   * `setupForm`: Funcion para crear e inicializar los campos del formulario con sus restricciones
+   */
   setupForm() {
     this.formulario = this.fb.group({
       host: [
@@ -70,10 +78,21 @@ export class LoginComponent {
     });
   }
 
-  validarInputs(control: any) {
+  /**
+   * `validarInputs`: Funcion que recibe los inputs del formulario y los envia
+   * a la funcion correspondiente para evaluar su validez
+   *
+   * @param control = Input del formulario
+   * @returns bool = Determina si es valido o no el input del formulario
+   */
+  validarInputs(control: any): boolean {
     return esCampoRequerido(control);
   }
 
+  /**
+   * `onLogin`: Funcion que recibe los datos del formulario y los procesa para enviarselos a funcion
+   * encargada de hacer la peticion al servidor
+   */
   onLogin(): void {
     if (this.formulario.valid) {
       this.loading = true; // Activamos el indicador de carga

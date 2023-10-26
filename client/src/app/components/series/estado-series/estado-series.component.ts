@@ -12,9 +12,17 @@ export class EstadoSeriesComponent {
   serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC');
   @Input() idSerie: number = 0; // Recibe el objeto Serie desde el componente padre
   errorMge: string = '';
+  /**
+   * `loading`: Variable booleana utilizada para determinar cuando mostrar
+   * el modal de 'Cargando ...'
+   */
   loading = false;
   constructor(public modal: NgbActiveModal, private serieServ: SeriesService) {}
 
+  /**
+   * El propósito de `ngOnInit` es realizar tareas de inicialización o configuración
+   * que son necesarias antes de que el componente se renderice en la vista.
+   */
   ngOnInit(): void {
     if (this.idSerie) {
       this.serieServ.GetSerie(this.idSerie).subscribe(
@@ -28,6 +36,12 @@ export class EstadoSeriesComponent {
     }
   }
 
+  /**
+   * `errorMessage`: La funcion se encarga de analizar el registro y en caso de no cumplir
+   * con ciertas condiciones entonces enviara un mensaje de error
+   *
+   * @returns string = Mensaje correspondiente
+   */
   errorMessage() {
     if (this.serie.estado === 'AN')
       return (this.errorMge = 'No se puede anular una serie ya inactiva!');
@@ -35,6 +49,10 @@ export class EstadoSeriesComponent {
     return '';
   }
 
+  /**
+   * `anularRegistro`: Funcion que recibe los datos del formulario y los procesa para enviarselos a funcion
+   * encargada de hacer la peticion al servidor
+   */
   anularRegistro() {
     this.serie.estado = 'AN';
     this.loading = true;

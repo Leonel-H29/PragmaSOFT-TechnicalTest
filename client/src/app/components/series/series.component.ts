@@ -9,6 +9,11 @@ import { TokenService } from 'src/app/service/token.service';
 })
 export class SeriesComponent {
   constructor(private router: Router, private token: TokenService) {}
+
+  /**
+   * El propósito de `ngOnInit` es realizar tareas de inicialización o configuración
+   * que son necesarias antes de que el componente se renderice en la vista.
+   */
   ngOnInit(): void {
     //Si el usuario no esta logueado entonces se redigira a la pagina de inicio de sesion
     if (!this.token.isLogged()) {

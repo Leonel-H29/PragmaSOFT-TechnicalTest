@@ -14,6 +14,10 @@ export class LogoutComponent {
     private router: Router
   ) {}
 
+  /**
+   * `cerrarSesion`: La funcion se encarga de cerrar la sesion del usuario
+   * @returns
+   */
   cerrarSesion() {
     this.token.Logout();
     if (this.token.isLogged()) {

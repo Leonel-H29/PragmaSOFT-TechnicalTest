@@ -11,15 +11,15 @@ import { esCampoRequerido } from 'src/app/utils/validations-util';
   styleUrls: ['./update-series.component.css'],
 })
 export class UpdateSeriesComponent {
-  serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC'); // Recibe el objeto Serie desde el componente padre
+  serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC');
+  @Input() idSerie: number = 0; // Recibe el objeto Serie desde el componente padre
 
-  //@Input() serie: Serie = new Serie('', '', new Date(), 0, '', 0, false, 'AC'); // Recibe el objeto Serie desde el componente padre
-  @Input() idSerie: number = 0;
-
-  //idserie: number = 0;
   public formulario!: FormGroup;
-  isFormValid?: boolean;
   errorMge: string = '';
+  /**
+   * `loading`: Variable booleana utilizada para determinar cuando mostrar
+   * el modal de 'Cargando ...'
+   */
   loading = true;
   generos = [
     { text: 'Acción', value: 'Accion' },
@@ -36,6 +36,10 @@ export class UpdateSeriesComponent {
     private serieServ: SeriesService
   ) {}
 
+  /**
+   * El propósito de `ngOnInit` es realizar tareas de inicialización o configuración
+   * que son necesarias antes de que el componente se renderice en la vista.
+   */
   ngOnInit(): void {
     if (this.idSerie) {
       this.serieServ.GetSerie(this.idSerie).subscribe(
@@ -50,14 +54,21 @@ export class UpdateSeriesComponent {
         }
       );
     }
-
-    //this.isFormValid = this.formulario.valid;
   }
-
-  validarInputs(control: any) {
+  /**
+   * `validarInputs`: Funcion que recibe los inputs del formulario y los envia
+   * a la funcion correspondiente para evaluar su validez
+   *
+   * @param control = Input del formulario
+   * @returns bool = Determina si es valido o no el input del formulario
+   */
+  validarInputs(control: any): boolean {
     return esCampoRequerido(control);
   }
 
+  /**
+   * `setupForm`: Funcion para crear e inicializar los campos del formulario con sus restricciones
+   */
   setupForm() {
     //Defino el formulario con sus valores iniciales
     this.formulario = this.fb.group({
@@ -99,6 +110,12 @@ export class UpdateSeriesComponent {
     });
   }
 
+  /**
+   * `errorMessage`: La funcion se encarga de analizar el registro y en caso de no cumplir
+   * con ciertas condiciones entonces enviara un mensaje de error
+   *
+   * @returns string = Mensaje correspondiente
+   */
   errorMessage() {
     if (this.serie.estado === 'AN')
       return (this.errorMge = 'No se puede modificar una serie inactiva!');
@@ -106,6 +123,10 @@ export class UpdateSeriesComponent {
     return '';
   }
 
+  /**
+   * `guardarRegistroEditado`: Funcion que recibe los datos del formulario y los procesa para enviarselos a funcion
+   * encargada de hacer la peticion al servidor
+   */
   guardarRegistroEditado() {
     if (this.formulario.valid) {
       this.loading = true;

@@ -12,7 +12,11 @@ import { esCampoRequerido } from 'src/app/utils/validations-util';
 })
 export class NewSeriesComponent {
   formulario!: FormGroup;
-  isFormValid?: boolean;
+
+  /**
+   * `loading`: Variable booleana utilizada para determinar cuando mostrar
+   * el modal de 'Cargando ...'
+   */
   loading = false;
   generos = [
     { text: 'Acción', value: 'Accion' },
@@ -29,17 +33,28 @@ export class NewSeriesComponent {
     private serieServ: SeriesService
   ) {}
 
+  /**
+   * El propósito de `ngOnInit` es realizar tareas de inicialización o configuración
+   * que son necesarias antes de que el componente se renderice en la vista.
+   */
   ngOnInit(): void {
     this.setupForm();
-
-    //console.log(this.formulario.value);
-    this.isFormValid = this.formulario.valid;
   }
 
-  validarInputs(control: any) {
+  /**
+   * `validarInputs`: Funcion que recibe los inputs del formulario y los envia
+   * a la funcion correspondiente para evaluar su validez
+   *
+   * @param control = Input del formulario
+   * @returns bool = Determina si es valido o no el input del formulario
+   */
+  validarInputs(control: any): boolean {
     return esCampoRequerido(control);
   }
 
+  /**
+   * `setupForm`: Funcion para crear e inicializar los campos del formulario con sus restricciones
+   */
   setupForm() {
     //Defino el formulario con sus valores iniciales
     this.formulario = this.fb.group({
@@ -79,6 +94,10 @@ export class NewSeriesComponent {
     });
   }
 
+  /**
+   * `guardarNuevoRegistro`: Funcion que recibe los datos del formulario y los procesa para enviarselos a funcion
+   * encargada de hacer la peticion al servidor
+   */
   guardarNuevoRegistro() {
     this.loading = true;
     if (this.formulario.valid) {

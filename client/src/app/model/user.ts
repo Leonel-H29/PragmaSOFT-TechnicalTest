@@ -1,3 +1,7 @@
+/**
+ * `User`: clase definida para poder realizar la consulta de autenticacion del lado del cliente al servidor
+ */
+
 export class User {
   host: string;
   port: number;
