@@ -162,7 +162,7 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED         S
 
 | URI                    | METHOD | DESCRIPCION                      | TOKEN REQUIRED |
 | :--------------------- | :----: | :------------------------------- | :------------- |
-| /api/login             |  GET   | Inicio de sesion                 | NO             |
+| /api/login             |  POST  | Inicio de sesion                 | NO             |
 | /api/series/           |  GET   | Obtener la lista de las series   | SI             |
 | /api/series/id         |  GET   | Obtener una serie por su id      | SI             |
 | /api/series/<Serie>    |  POST  | Dar de alta a una nueva serie    | SI             |
